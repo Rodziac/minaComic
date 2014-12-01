@@ -14,7 +14,7 @@ app.get(/^(?!\/js|\/css|\/img).*$/, function (req, res) {
     };
     res.sendFile('index.html', options);
 });
-router.use(express.static(__dirname + '/public'));
+app.use(express.static(__dirname + '/public'));
 
 //app.get(/^(\/js|\/css|\/img).*$/, function (req, res) {
 //    console.log("resource hit!");

@@ -2,17 +2,24 @@ var express = require('express');
 
 var app = express();
 
-app.use(express.static(__dirname + '/public'));
-
 app.get(/^(?!\/js|\/css|\/img).*$/, function (req, res) {
     console.log("page hit!");
-    res.sendFile('/public/index.html');
+    var options = {
+        root: __dirname + '/public/',
+        dotfiles: 'deny',
+        headers: {
+            'x-timestamp': Date.now(),
+            'x-sent': true
+        }
+    };
+    res.sendFile('index.html', options);
 });
+router.use(express.static(__dirname + '/public'));
 
-app.get(/^(\/js|\/css|\/img).*$/, function (req, res) {
-    console.log("resource hit!");
-    res.sendFile('/public/' + req.url);
-});
+//app.get(/^(\/js|\/css|\/img).*$/, function (req, res) {
+//    console.log("resource hit!");
+//    res.sendFile('/public/' + req.url);
+//});
 
 var server = app.listen(process.env.PORT || 3000, function () {
 

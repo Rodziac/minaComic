@@ -22,8 +22,7 @@ app.get(/^(\/js|\/css|\/img).*$/, function (req, res) {
 
     var root = req.url.substr(1);
     root = root.split("/");
-    var file = root[root.length - 1];
-    root = root.pop();
+    var file = root.pop();
     root = root.join("/");
 
     console.log(process.env.PWD + '/public/' + root + "  :::  " + file);

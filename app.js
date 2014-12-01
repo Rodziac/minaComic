@@ -18,7 +18,7 @@ app.get(/^(?!\/js|\/css|\/img).*$/, function (req, res) {
 });
 
 app.get(/^(\/js|\/css|\/img).*$/, function (req, res) {
-    console.log("resource hit!");
+    console.log("resource hit! " + req.url);
 
     var options = {
         root: __dirname + '/public/',

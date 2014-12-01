@@ -7,7 +7,7 @@ app.use(express.static(process.env.PWD + '/public'));
 app.get(/^(?!\/js|\/css|\/img).*$/, function (req, res) {
 
     var options = {
-        root: __dirname + '/public/',
+        root: process.env.PWD + '/public/',
         dotfiles: 'deny',
         headers: {
             'x-timestamp': Date.now(),

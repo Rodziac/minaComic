@@ -5,10 +5,12 @@ var app = express();
 app.use(express.static(__dirname + '/public'));
 
 app.get(/^(?!\/js|\/css|\/img).*$/, function (req, res) {
+    console.log("page hit!");
     res.sendFile('/public/index.html');
 });
 
 app.get(/^(\/js|\/css|\/img).*$/, function (req, res) {
+    console.log("resource hit!");
     res.sendFile('/public/' + req.url);
 });
 

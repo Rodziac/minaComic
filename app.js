@@ -29,7 +29,7 @@ app.get(/^(\/js|\/css|\/img).*$/, function (req, res) {
         }
     };
 
-    res.sendFile(req.url, options);
+    res.sendFile(req.url.substr(1), options);
 });
 
 var server = app.listen(process.env.PORT || 3000, function () {

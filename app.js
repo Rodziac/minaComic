@@ -4,6 +4,7 @@ var app = express();
 
 app.get(/^(?!\/js|\/css|\/img).*$/, function (req, res) {
     console.log("page hit!");
+
     var options = {
         root: __dirname + '/public/',
         dotfiles: 'deny',
@@ -12,14 +13,24 @@ app.get(/^(?!\/js|\/css|\/img).*$/, function (req, res) {
             'x-sent': true
         }
     };
+
     res.sendFile('index.html', options);
 });
-app.use(express.static(__dirname + '/public'));
 
-//app.get(/^(\/js|\/css|\/img).*$/, function (req, res) {
-//    console.log("resource hit!");
-//    res.sendFile('/public/' + req.url);
-//});
+app.get(/^(\/js|\/css|\/img).*$/, function (req, res) {
+    console.log("resource hit!");
+
+    var options = {
+        root: __dirname + '/public/',
+        dotfiles: 'deny',
+        headers: {
+            'x-timestamp': Date.now(),
+            'x-sent': true
+        }
+    };
+
+    res.sendFile(req.url, options);
+});
 
 var server = app.listen(process.env.PORT || 3000, function () {
 

@@ -4,14 +4,13 @@ var app = express();
 
 app.use(express.static(__dirname + '/public'));
 
-app.get("/*", function(req, res){
-    console.log(req);
-    res.send("done");
+app.get(/^(?!\/js|\/css|\/img).*$/, function (req, res) {
+    res.sendFile('/public/index.html');
 });
-//app.get(/^(?!\/js|\/css|\/img).*$/, function (req, res) {
-//    console.log(req);
-//    res.sendFile('/public/index.html');
-//});
+
+app.get(/^(\/js|\/css|\/img).*$/, function (req, res) {
+    res.sendFile('/public/' + req.url);
+});
 
 var server = app.listen(process.env.PORT || 3000, function () {
 

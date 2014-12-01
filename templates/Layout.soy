@@ -1,0 +1,47 @@
+{namespace MICO.Views.Layout autoescape="false"}
+
+/**
+ * Bare page layout
+ */
+{template .mainLayout}
+    <div id="header"></div>
+    <div id="content"></div>
+    <div id="footer"></div>
+{/template}
+
+/**
+ * Header for user pages
+ */
+{template .userHeader}
+    <div class="logoContainer">
+        <a href="/"></a>
+    </div>
+    <div class="socialContainer">{call .socialProfiles data="all" /}</div>
+    <div class="pageNavigator">
+        <ul>
+            <li class="home"><a href="/">Home</a></li>
+            <li class="archive"><a href="/archive">Archive</a></li>
+            <li class="about"><a href="/about">About</a></li>
+        </ul>
+    </div>
+{/template}
+
+/**
+ * Footer for user pages
+ */
+{template .userFooter}
+    <div class="copyright"> Copyright 2014-2015 boobs</div>
+    <div class="socialContainer">{call .socialProfiles data="all" /}</div>
+{/template}
+
+/**
+ * Social profiles buttons
+ */
+{template .socialProfiles}
+    <ul>
+        <li><a href="http://facebook.com" class="externalLink social facebook">Facebook</a></li>
+        <li><a href="http://tumblr.com" class="externalLink social tumblr">Tumblr</a></li>
+        <li><a href="http://youtube.com" class="externalLink social youtube">Youtube</a></li>
+        <li><a href="http://newgrounds.com" class="externalLink social newgrounds">Newgrounds</a></li>
+    </ul>
+{/template}

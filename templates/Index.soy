@@ -1,0 +1,69 @@
+{namespace MICO.Views.Index autoescape="false"}
+
+/**
+ * Index and comic page template
+  * @param? params comic data
+ */
+{template .pageContents}
+    <div class="comicContentContainer">
+        <h2 class="comicTitleContainer">
+            {$params.date} - {$params.title}
+        </h2>
+        <div class="advertisement wide top"></div>
+        <div class="comicNavigation">
+            {call .comicNavigation data="all" /}
+        </div>
+        <div class="advertisement long left"></div>
+        <div class="comicContainer">
+            {call .comicWrapper data="all" /}
+        </div>
+        <div class="advertisement long right"></div>
+        <div class="comicNavigation">
+            {call .comicNavigation data="all" /}
+        </div>
+        <div class="advertisement wide bottom"></div>
+        <div class="comicContentContainer">
+            {call .descriptionWrapper data="all" /}
+        </div>
+    </div>
+{/template}
+
+/**
+ * Comic navigation bar
+ * @param? params comic data
+ */
+{template .comicNavigation}
+    {if $params.comicId == 0}<span class="deactive navFirst">{else}<a class="navFirst" href="/comic/0">First</a>{/if}
+    {if $params.comicId == 0}<span class="deactive navPrevious">{else}<a class="navPrevious" href="/comic/{$params.comicId - 1}">Previous</a>{/if}
+    <a class="navRandom" href="/comic/{randomInt($params.latestComicId)}">Random</a>
+    {if $params.comicId == $params.latestComicId}<span class="deactive navNext">{else}<a class="navNext" href="/comic/{$params.comicId + 1}">Next</a>{/if}
+    {if $params.comicId == $params.latestComicId}<span class="deactive navLatest">{else}<a class="navLatest" href="/comic/{$params.latestComicId}">Latest</a>{/if}
+{/template}
+
+/**
+ * Comic itself
+ * Todo: Change if to switch/case
+ * @param? params comic data
+ */
+{template .comicWrapper}
+    {if $params.comicImageUrl}
+        {if $params.comicId != $params.latestComicId} <a href="/comic/{$params.comicId + 1}"> {/if}
+            <img class="comicElement" src="{$params.comicImageUrl}" alt="{$params.altText}" />
+        {if $params.comicId != $params.latestComicId} </a> {/if}
+    {elseif $params.comicSwfUrl}
+    {elseif $params.comicYoutubeEmbed}
+    {/if}
+{/template}
+
+/**
+ * Description section of the comic
+ * @param params comic data
+ */
+{template .descriptionWrapper}
+    <h3 class="comicDescriptionTitle">
+        {$params.date} - {$params.title}
+    </h3>
+    <p class="comicDescription">
+        {$params.description}
+    </p>
+{/template}

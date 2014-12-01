@@ -1,0 +1,13 @@
+{
+    "name": "minaComic",
+    "version": "0.0.1",
+    "description": "A comic web application",
+    "author": "Umut Kaya Ilkiz <umutkaya2000@gmail.com>",
+    "scripts": {
+        "start": "node app.js"
+    },
+    "dependencies": {
+        "express": "*"
+    },
+    "private": true
+}

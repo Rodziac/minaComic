@@ -1,0 +1,27 @@
+{namespace MICO.Views.Archive autoescape="false"}
+
+/**
+ * Index and comic page template
+ * @param? params Archive array object
+ */
+{template .pageContents}
+    <div class="archiveContentContainer">
+        <div class="archive">
+            {call .archiveList data="all" /}
+        </div>
+    </div>
+{/template}
+
+/**
+ * Comic navigation bar
+ * @param? params Navbar position data
+ */
+{template .archiveList}
+    <ul>
+    {foreach $comic in $params.comics }
+        <li>
+            <a href="/comic/{$comic.id}">{$comic.title} - {$comic.date}</a>
+        </li>
+    {/foreach}
+    </ul>
+{/template}

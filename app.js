@@ -1,5 +1,9 @@
 var express = require('express');
+
 var app = express();
+
+app.use(express.static(__dirname + '/public'));
+
 
 app.get(/^(?!\/js|\/css|img).*$/, function (req, res) {
     res.sendFile('/public/index.html');

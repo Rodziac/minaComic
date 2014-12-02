@@ -1,5 +1,8 @@
 var express = require('express');
 var mongoose = require('mongoose');
+//var api = require('./api/api.js');
+//var aboutApi = require('./aboutApi.js');
+//var comicApi = require('./comicApi.js');
 
 var app = express();
 
@@ -18,6 +21,12 @@ app.get(/^(?!\/js|\/css|\/img|\/api).*$/, function(req, res) {
 
     res.sendFile('index.html', options);
 });
+
+//mongoose.connect(process.env.MONGOHQ_URL);
+//exports.db = mongoose.connection;
+//
+//router.use('api', api);
+
 
 var server = app.listen(process.env.PORT || 3000, function() {
 

@@ -1,10 +1,11 @@
 var express = require('express');
+var mongoose = require('mongoose');
 
 var app = express();
 
 app.use(express.static(__dirname + '/public'));
 
-app.get(/^(?!\/js|\/css|\/img).*$/, function (req, res) {
+app.get(/^(?!\/js|\/css|\/img|\/api).*$/, function(req, res) {
 
     var options = {
         root: process.env.PWD + '/public/',
@@ -18,7 +19,7 @@ app.get(/^(?!\/js|\/css|\/img).*$/, function (req, res) {
     res.sendFile('index.html', options);
 });
 
-var server = app.listen(process.env.PORT || 3000, function () {
+var server = app.listen(process.env.PORT || 3000, function() {
 
     var host = server.address().address;
     var port = server.address().port;
@@ -26,3 +27,6 @@ var server = app.listen(process.env.PORT || 3000, function () {
     console.log('MinaComic listening at http://%s:%s', host, port);
 
 });
+
+
+

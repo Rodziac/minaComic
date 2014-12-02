@@ -7,7 +7,8 @@
         "start": "node app.js"
     },
     "dependencies": {
-        "express": "*"
+        "express": "*",
+        "mongoose": "*"
     },
     "engines": {
         "node": "0.10.33",

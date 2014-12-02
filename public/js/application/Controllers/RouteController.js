@@ -23,7 +23,9 @@ MICO.Controllers.RouteController = function() {
     goog.base(this);
 
     this.routesMap = [];
-    this.historyObject = new goog.history.Html5History();
+    if (goog.history.Html5History.isSupported(window)) {
+        this.historyObject = new goog.history.Html5History();
+    }
 
 
 };
@@ -38,26 +40,32 @@ MICO.Controllers.RouteController.prototype.startRouting = function () {
 
     this.setRoutes_();
 
-    // Disable postback on link click
-    goog.events.listen(document, 'click', function(e){
-        if(e.target.nodeName == "A" && e.target.href && e.target.href != "javascript:;" && !goog.dom.classlist.contains(e.target, goog.getCssName('externalLink'))) {
+    if (this.historyObject) {
+
+        // Disable postback on link click
+        goog.events.listen(document, 'click', function (e) {
+            if (e.target.nodeName == "A" && e.target.href && e.target.href != "javascript:;" && !goog.dom.classlist.contains(e.target, goog.getCssName('externalLink'))) {
+                e.preventDefault();
+                that.historyObject.setToken(e.target.href.replace(window.location.origin, "").substr(1));
+            }
+        });
+
+        // Listen history navigation events and nav
+        goog.events.listen(this.historyObject, goog.history.EventType.NAVIGATE, function (e) {
+
             e.preventDefault();
-            that.historyObject.setToken(e.target.href.replace(window.location.origin, "").substr(1));
-        }
-    });
+            that.historyObject.setToken(e.token);
+            that.findNavigation_(e.token);
 
-    // Listen history navigation events and nav
-    goog.events.listen(this.historyObject, goog.history.EventType.NAVIGATE, function (e) {
+        });
 
-        e.preventDefault();
-        that.historyObject.setToken(e.token);
-        that.findNavigation_(e.token);
+        this.historyObject.setUseFragment(false);
+        this.historyObject.setPathPrefix('/');
+        this.historyObject.setEnabled(true);
 
-    });
-
-    this.historyObject.setUseFragment(false);
-    this.historyObject.setPathPrefix('/');
-    this.historyObject.setEnabled(true);
+    } else {
+        that.findNavigation_(window.location.pathname.substr(1));
+    }
 
 
 };
@@ -186,7 +194,7 @@ MICO.Controllers.RouteController.prototype.findNavigation_ = function (pageToken
                 if (onTrack) {
 
                     // Ignore if current section is a parameter
-                    if (pathSection[0] != ":") {
+                    if (pathSection.substr(0, 1) != ":") {
 
                         // Skip this route if combo is broken
                         if (pathSection != tokenRootSections[index]) {
@@ -238,7 +246,7 @@ MICO.Controllers.RouteController.prototype.navigateToPage_ = function (currentRo
 
     goog.array.forEach(routeSections, function(routeSection, index) {
 
-        if(routeSection[0] == ":") {
+        if(routeSection.substr(0, 1) == ":") {
 
             params[routeSection.substr(1)] = tokenSections[index];
 

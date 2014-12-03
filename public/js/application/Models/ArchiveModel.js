@@ -26,7 +26,7 @@ MICO.Models.ArchiveModel.prototype.getFullArchive = function(callback) {
     //          {
     //              title: string,
     //              date: string,
-    //              id: string
+    //              comicId: string
     //          }
     //      ]
     // }
@@ -36,12 +36,12 @@ MICO.Models.ArchiveModel.prototype.getFullArchive = function(callback) {
             {
                 title: "first",
                 date: "01/01/1990",
-                id: 0
+                comicId: 0
             },
             {
                 title: "second",
                 date: "02/01/1990",
-                id: 1
+                comicId: 1
             }
         ]
     });

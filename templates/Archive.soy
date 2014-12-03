@@ -20,7 +20,7 @@
     <ul>
     {foreach $comic in $params.comics }
         <li>
-            <a href="/comic/{$comic.id}">{$comic.title} - {$comic.date}</a>
+            <a href="/comic/{$comic.comicId}">{$comic.title} - {$comic.date}</a>
         </li>
     {/foreach}
     </ul>

@@ -1,8 +1,6 @@
 var express = require('express');
 var mongoose = require('mongoose');
-//var api = require('./api/api.js');
-//var aboutApi = require('./aboutApi.js');
-//var comicApi = require('./comicApi.js');
+var mongooseAutoIncrement = require('mongoose-auto-increment');
 
 var app = express();
 
@@ -22,10 +20,15 @@ app.get(/^(?!\/js|\/css|\/img|\/api).*$/, function(req, res) {
     res.sendFile('index.html', options);
 });
 
-//mongoose.connect(process.env.MONGOHQ_URL);
-//exports.db = mongoose.connection;
-//
-//router.use('api', api);
+mongoose.connect(process.env.MONGOHQ_URL || "mongodb://heroku:Q4a1X7GUj1wACe6cYFpk7vP-gHSirVfay47t9s_pLnyPrgcriSp17dOxdDAquYtt2SCT5o5lYrLfOll0pGej6g@lennon.mongohq.com:10005/app32120463");
+var db = mongoose.connection;
+mongooseAutoIncrement.initialize(db);
+
+
+var contentApi = require('./api/contentApi.js');
+var comicApi = require('./api/comicApi.js');
+app.use('/api/comic', comicApi.comicRouter);
+app.use('/api/content', contentApi.contentRouter);
 
 
 var server = app.listen(process.env.PORT || 3000, function() {

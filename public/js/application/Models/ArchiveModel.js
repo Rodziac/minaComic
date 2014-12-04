@@ -4,6 +4,7 @@ goog.require('MICO.MVC.Model');
 
 /**
  * Archive page model to fetch archive data
+ * @extends {MICO.MVC.Model}
  * @constructor
  */
 MICO.Models.ArchiveModel = function() {
@@ -15,35 +16,24 @@ goog.inherits(MICO.Models.ArchiveModel, MICO.MVC.Model);
 
 /**
  * Get simple list of all comics
- * @param {function} callback callback function
+ * Example:
+ * {
+ *      comics: [
+ *          {
+ *              title: string,
+ *              date: string,
+ *              comicId: string
+ *          }
+ *      ]
+ * }
+ * @param {function(Object=)} callback callback function
  */
 MICO.Models.ArchiveModel.prototype.getFullArchive = function(callback) {
 
-    // TODO: Fetch full comic list as archive and feed callback
-    // Example:
-    // {
-    //      comics: [
-    //          {
-    //              title: string,
-    //              date: string,
-    //              comicId: string
-    //          }
-    //      ]
-    // }
+    this.get('/api/comic/getComicArchive', params, function(response) {
+//TODO: Handle error situation
+        callback.call(this, response);
 
-    callback.call(this, {
-        comics: [
-            {
-                title: "first",
-                date: "01/01/1990",
-                comicId: 0
-            },
-            {
-                title: "second",
-                date: "02/01/1990",
-                comicId: 1
-            }
-        ]
     });
 
 };

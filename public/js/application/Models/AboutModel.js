@@ -4,6 +4,7 @@ goog.require('MICO.MVC.Model');
 
 /**
  * About page model to fetch about data
+ * @extends {MICO.MVC.Model}
  * @constructor
  */
 MICO.Models.AboutModel = function() {
@@ -15,20 +16,24 @@ goog.inherits(MICO.Models.AboutModel, MICO.MVC.Model);
 
 /**
  * Get about page content from BE
- * @param {function} callback callback function
+ * Example:
+ * {
+ *      contentType: string,
+ *      title: string,
+ *      description: string
+ * }
+ * @param {function(Object=)} callback callback function
  */
 MICO.Models.AboutModel.prototype.getAboutContent = function(callback) {
 
-    // TODO: Fetch about page data and feed to callback
-    // Example:
-    // {
-    //      title: string
-    //      description: string
-    // }
+    var param = {
+        "contentType": "about"
+    };
 
-    callback.call(this, {
-        title: "hello!",
-        description: "this is me, I am this."
+    this.get('/api/content/getContent', param, function(response) {
+
+        callback.call(this, response);
+
     });
 
 };

@@ -36,7 +36,7 @@ MICO.Controllers.IndexController.prototype.index = function(params) {
 
 /**
  * Render page content
- * @param {string|int=} comicId ID of the requested comic
+ * @param {string|number=} comicId ID of the requested comic
  */
 MICO.Controllers.IndexController.prototype.renderPageContent = function(comicId) {
 

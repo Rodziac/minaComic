@@ -4,6 +4,7 @@ goog.require("MICO.MVC.Model");
 
 /**
  * Index model to fetch comics
+ * @extends {MICO.MVC.Model}
  * @constructor
  */
 MICO.Models.IndexModel = function() {
@@ -15,33 +16,31 @@ goog.inherits(MICO.Models.IndexModel, MICO.MVC.Model);
 
 /**
  * Get detailed data of comic
- * @param {function} callback callback function
+ * Response example:
+ * {
+ *     comicId: int,
+ *     latestComicId: int,
+ *     comicImageUrl: string,
+ *     comicSwfUrl: string,
+ *     comicYoutubeEmbed: string,
+ *     altText: string,
+ *     description: string,
+ *     title: string,
+ *     date: string
+ * }
+ * @param {function(Object=)} callback callback function
  */
 MICO.Models.IndexModel.prototype.getComicData = function(callback) {
 
-    // TODO: Get data from BE and feed it to callback
-    // Response example:
-    // {
-    //      comicId: int,
-    //      latestComicId: int,
-    //      comicImageUrl: string,
-    //      comicSwfUrl: string,
-    //      comicYoutubeEmbed: string,
-    //      altText: string,
-    //      description: string,
-    //      title: string,
-    //      date: string
-    // }
-    callback.call(this, {
-        comicId: this.comicId ? parseInt(this.comicId, 10) : 5,
-        latestComicId: 5,
-        comicImageUrl: "/uploads/5.png",
-        comicSwfUrl: "",
-        comicYoutubeEmbed: "",
-        altText: "altText",
-        description: "this is stuff!",
-        title: "demo comic",
-        date: "07/01/1990"
-    })
+
+    var params = {
+        comicId: this.comicId
+    };
+
+    this.get('/api/comic/getComicData', params, function(response) {
+//TODO: Handle error situation
+        callback.call(this, response);
+
+    });
 
 };

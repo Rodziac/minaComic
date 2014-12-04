@@ -1,9 +1,11 @@
 var express = require('express');
+var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var mongooseAutoIncrement = require('mongoose-auto-increment');
 
 var app = express();
 
+app.use(bodyParser.json());
 app.use(express.static(__dirname + '/public'));
 
 app.get(/^(?!\/js|\/css|\/img|\/api).*$/, function(req, res) {

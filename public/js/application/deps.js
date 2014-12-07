@@ -6,7 +6,7 @@ goog.addDependency('../../../../../js/application/Controllers/ArchiveController.
 goog.addDependency('../../../../../js/application/Controllers/ComicController.js', ['MICO.Controllers.ComicController'], ['MICO.MVC.Controller', 'MICO.Models.ComicModel', 'MICO.Views.Comic', 'MICO.Views.Layout']);
 goog.addDependency('../../../../../js/application/Controllers/RouteController.js', ['MICO.Controllers.RouteController'], ['MICO.Controllers.AboutController', 'MICO.Controllers.AdminController', 'MICO.Controllers.ArchiveController', 'MICO.Controllers.ComicController', 'MICO.MVC.Controller', 'goog.dom.classlist', 'goog.history.Html5History', 'goog.string']);
 goog.addDependency('../../../../../js/application/MVC/Controller.js', ['MICO.MVC.Controller'], ['goog.dom']);
-goog.addDependency('../../../../../js/application/MVC/Model.js', ['MICO.MVC.Model'], ['goog.Uri.QueryData', 'goog.labs.net.xhr.ResponseType', 'goog.net.XhrManager', 'goog.string', 'goog.structs.Map']);
+goog.addDependency('../../../../../js/application/MVC/Model.js', ['MICO.MVC.Model'], ['goog.Uri.QueryData', 'goog.json.Serializer', 'goog.labs.net.xhr.ResponseType', 'goog.net.XhrManager', 'goog.string', 'goog.structs.Map']);
 goog.addDependency('../../../../../js/application/MVC/View.js', ['MICO.MVC.View'], []);
 goog.addDependency('../../../../../js/application/Models/ComicModel.js', ['MICO.Models.ComicModel'], ['MICO.MVC.Model']);
 goog.addDependency('../../../../../js/application/Models/ContentModel.js', ['MICO.Models.ContentModel'], ['MICO.MVC.Model']);

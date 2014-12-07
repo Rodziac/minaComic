@@ -25,13 +25,11 @@ var comicCollection = mongoose.model("Comic", comicSchema);
 
 router.get("/getComicData", function (req, res) {
 
-    console.log(req.param("comicId"));
-
     comicCollection.nextCount(function(err, count) {
 
         var latestComicId = count - 1;
 
-        var requestedComicId = req.param("comicId") || req.param("comicId") === 0 ? 0 : latestComicId;
+        var requestedComicId = req.param("comicId") == 'undefined' ? latestComicId : req.param("comicId");
 
         comicCollection.findOne({comicId: requestedComicId, disabled: false}, null, function(err, comic){
 
@@ -56,6 +54,8 @@ router.get("/getComicArchive", function (req, res) {
 
 router.post("/addComic", function (req, res) {
 
+    console.log(req.param("title"));
+
     var newComic = new comicCollection({
         comicImageUrl: req.param("comicImageUrl") || "",
         comicEmbed: req.param("comicYoutubeEmbed") || "",
@@ -75,8 +75,8 @@ router.post("/addComic", function (req, res) {
 });
 
 router.put("/editComic", function (req, res) {
-
-    console.log(req.params, req.param('comicId'));
+debugger;
+    console.log(req.body, req.param('comicId'));
     comicCollection.update({comicId: req.param('comicId')}, req.body, null, function(err){
 
         res.json({success: true});

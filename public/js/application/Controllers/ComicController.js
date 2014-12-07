@@ -1,31 +1,31 @@
-goog.provide("MICO.Controllers.IndexController");
+goog.provide("MICO.Controllers.ComicController");
 
 goog.require("MICO.MVC.Controller");
 
-goog.require("MICO.Models.IndexModel");
+goog.require("MICO.Models.ComicModel");
 
 goog.require("MICO.Views.Layout");
-goog.require("MICO.Views.Index");
+goog.require("MICO.Views.Comic");
 
 /**
  * Index page controller
  * @extends {MICO.MVC.Controller}
  * @constructor
  */
-MICO.Controllers.IndexController = function() {
+MICO.Controllers.ComicController = function() {
 
     goog.base(this);
 
-    this.model = new MICO.Models.IndexModel();
+    this.model = new MICO.Models.ComicModel();
 
 };
-goog.inherits(MICO.Controllers.IndexController, MICO.MVC.Controller);
+goog.inherits(MICO.Controllers.ComicController, MICO.MVC.Controller);
 
 /**
  * Index page render and initialize
- * @param {Object} params page parameters
+ * @param {Object=} params page parameters
  */
-MICO.Controllers.IndexController.prototype.index = function(params) {
+MICO.Controllers.ComicController.prototype.index = function(params) {
 
     // Render header and footer
     this.render(this.headerTemplate, {}, goog.dom.getElement('header'));
@@ -38,7 +38,7 @@ MICO.Controllers.IndexController.prototype.index = function(params) {
  * Render page content
  * @param {string|number=} comicId ID of the requested comic
  */
-MICO.Controllers.IndexController.prototype.renderPageContent = function(comicId) {
+MICO.Controllers.ComicController.prototype.renderPageContent = function(comicId) {
 
     var that = this;
 
@@ -52,6 +52,6 @@ MICO.Controllers.IndexController.prototype.renderPageContent = function(comicId)
 
 };
 
-MICO.Controllers.IndexController.prototype.headerTemplate = MICO.Views.Layout.userHeader;
-MICO.Controllers.IndexController.prototype.footerTemplate = MICO.Views.Layout.userFooter;
-MICO.Controllers.IndexController.prototype.pageContents = MICO.Views.Index.pageContents;
+MICO.Controllers.ComicController.prototype.headerTemplate = MICO.Views.Layout.userHeader;
+MICO.Controllers.ComicController.prototype.footerTemplate = MICO.Views.Layout.userFooter;
+MICO.Controllers.ComicController.prototype.pageContents = MICO.Views.Comic.pageContents;

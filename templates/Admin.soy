@@ -1,0 +1,91 @@
+{namespace MICO.Views.Admin autoescape="false"}
+
+/**
+ * Content container of admin page
+ */
+{template .pageContents}
+
+<div class="adminContentContainer">
+    <div class="adminControlPanel">
+        {call .adminPanelTabs data="all" /}
+        <div class="goog-tab-bar-clear"></div>
+        {call .adminPanelContents data="all" /}
+    </div>
+</div>
+
+{/template}
+
+/**
+ * Tabs of admin panel
+ */
+{template .adminPanelTabs}
+<div id="tabs" class="goog-tab-bar goog-tab-bar-top">
+    <div class="goog-tab goog-tab-selected">Post Editor</div>
+    <div class="goog-tab">Post List</div>
+    <div class="goog-tab">Content Management</div>
+</div>
+{/template}
+
+/**
+ * Content container of admin panel
+ */
+{template .adminPanelContents}
+<div id="tabContent" class="goog-tab-content"></div>
+{/template}
+
+/**
+ * Post editor tab.
+ * Loads params into the editor for post editing
+ * @param? params comic parameters
+ */
+{template .postEditor}
+<div id="postForm">
+    <input type="text" class="comicId" disabled=disabled hidden=hidden value="{if $params.comicId}{$params.comicId}{else}-1{/if}"></input>
+    <span class="inputLabel">Title: </span>
+    <input type="text" class="title" value="{if $params.title}{$params.title}{/if}"></input>
+    <span class="inputLabel">Description: </span>
+    <div class="descriptionContainer">
+      <div id='descriptionEditorToolbox'></div>
+      <div id='descriptionText'>{if $params.description}{$params.description}{/if}</div>
+    </div>
+    <span class="inputLabel">Alt text: </span>
+    <input type="text" class="altText" value="{if $params.altText}{$params.altText}{/if}"></input>
+    <span class="inputLabel">Live date: </span>
+    <div class="comicStartDate"></div>
+    <span class="inputLabel">Disabled: </span>
+    <span class="isDisabled goog-checkbox {if $params.disabled}goog-checkbox-checked{/if}"></span>
+    <span class="inputLabel">Embed code: </span>
+    <textarea class="mediaEmbedCode">{if $params.comicEmbed}{$params.comicEmbed}{/if}</textarea>
+    <span class="inputLabel">Comic Image: </span>
+    <input type="file" accept="image{literal}/*{/literal}" class="comicImage"></input>
+    <span class="submitBtn">Submit</span>
+</div>
+{/template}
+
+/**
+ * Post list.
+ * shows data fetched by archive, can edit or delete comics
+ * @param? params comic array
+ */
+{template .postList}
+<select size="10" class="comicsList" name="comicsList">
+    {foreach $comic in $params.comics}<option value="{$comic.comicId}">{$comic.date} - {$comic.title}</option>{/foreach}
+</select>
+<span class="submitBtn">Submit</span>
+<span class="deleteBtn">Delete</span>
+{/template}
+
+/**
+ * Content editor tab.
+ * Pick content type from dropdown or add new one, then write and submit.
+ * Updates if exists, creates if not.
+ * @param? params content
+ */
+{template .contentEditor}
+    <div class="contentType"></div>
+    <div class="contentEditorContainer">
+      <div class='toolbar'></div>
+      <div class='contentText'>{$params.description}</div>
+    </div>
+    <span class="submitBtn"></span>
+{/template}

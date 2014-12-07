@@ -3,6 +3,7 @@ goog.provide('MICO.MVC.Model');
 goog.require('goog.structs.Map');
 goog.require('goog.net.XhrManager');
 goog.require('goog.labs.net.xhr.ResponseType');
+goog.require('goog.Uri.QueryData');
 goog.require('goog.string');
 
 /**
@@ -21,7 +22,9 @@ MICO.MVC.Model = function() {
  */
 MICO.MVC.Model.prototype.get = function(url, reqBody, callback) {
 
-    this.closureXhr.send(goog.string.getRandomString(), url, 'GET', reqBody, undefined, undefined, function(response){
+    var request = goog.Uri.QueryData.createFromMap(reqBody);
+
+    this.closureXhr.send(goog.string.getRandomString(), url + "?" + request.toString(), 'GET', reqBody, undefined, undefined, function(response){
         callback.call(this, response.target.getResponseJson());
     });
 

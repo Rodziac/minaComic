@@ -3,7 +3,7 @@ goog.provide("MICO.Controllers.RouteController");
 goog.require("MICO.MVC.Controller");
 
 // Page resources
-goog.require("MICO.Controllers.IndexController");
+goog.require("MICO.Controllers.ComicController");
 goog.require("MICO.Controllers.ArchiveController");
 goog.require("MICO.Controllers.AboutController");
 goog.require("MICO.Controllers.AdminController");
@@ -84,7 +84,7 @@ MICO.Controllers.RouteController.prototype.setRoutes_ = function() {
             secure: false
         },
         action: function(params) {
-            this.controller = new MICO.Controllers.IndexController();
+            this.controller = new MICO.Controllers.ComicController();
             this.controller.index(params);
         }
     });
@@ -97,7 +97,7 @@ MICO.Controllers.RouteController.prototype.setRoutes_ = function() {
             secure: false
         },
         action: function(params) {
-            this.controller = new MICO.Controllers.IndexController();
+            this.controller = new MICO.Controllers.ComicController();
             this.controller.index(params);
         }
     });

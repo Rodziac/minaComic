@@ -6,6 +6,7 @@ exports.contentRouter = router;
 
 var contentSchema = mongoose.Schema({
     contentType: String,
+    contentDescription: String,
     title: String,
     description: String
 });
@@ -30,3 +31,5 @@ router.put("/setContent", function(req, res) {
 
     });
 });
+
+//TODO: Get content types

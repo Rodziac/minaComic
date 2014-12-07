@@ -2,7 +2,7 @@ goog.provide("MICO.Controllers.AboutController");
 
 goog.require("MICO.MVC.Controller");
 
-goog.require("MICO.Models.AboutModel");
+goog.require("MICO.Models.ContentModel");
 
 goog.require("MICO.Views.Layout");
 goog.require("MICO.Views.About");
@@ -16,14 +16,14 @@ MICO.Controllers.AboutController = function() {
 
     goog.base(this);
 
-    this.model = new MICO.Models.AboutModel();
+    this.model = new MICO.Models.ContentModel();
 
 };
 goog.inherits(MICO.Controllers.AboutController, MICO.MVC.Controller);
 
 /**
  * About page render and initialize
- * @param {Object} params page parameters
+ * @param {Object=} params page parameters
  */
 MICO.Controllers.AboutController.prototype.index = function(params) {
 
@@ -42,7 +42,8 @@ MICO.Controllers.AboutController.prototype.renderPageContent = function() {
 
     var that = this;
 
-    this.model.getAboutContent(function(response){
+    this.model.contentType = "about";
+    this.model.getContent(function(response){
 
         that.render(that.pageContents, response, goog.dom.getElement("content"));
 

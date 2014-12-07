@@ -2,7 +2,7 @@ goog.provide("MICO.Controllers.ArchiveController");
 
 goog.require("MICO.MVC.Controller");
 
-goog.require("MICO.Models.ArchiveModel");
+goog.require("MICO.Models.ComicModel");
 
 goog.require("MICO.Views.Layout");
 goog.require("MICO.Views.Archive");
@@ -16,14 +16,14 @@ MICO.Controllers.ArchiveController = function() {
 
     goog.base(this);
 
-    this.model = new MICO.Models.ArchiveModel();
+    this.model = new MICO.Models.ComicModel();
 
 };
 goog.inherits(MICO.Controllers.ArchiveController, MICO.MVC.Controller);
 
 /**
  * Archive page render and initialize
- * @param {Object} params page parameters
+ * @param {Object=} params page parameters
  */
 MICO.Controllers.ArchiveController.prototype.index = function(params) {
 

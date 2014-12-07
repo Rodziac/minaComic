@@ -11,12 +11,12 @@ var comicSchema = mongoose.Schema(
         comicId: Number,
         latestComicId: Number,
         comicImageUrl: String,
-        comicSwfUrl: String,
-        comicYoutubeEmbed: String,
+        comicEmbed: String,
         altText: String,
         description: String,
         title: String,
-        date: Date
+        date: Date,
+        disabled: Boolean
     }
 );
 comicSchema.plugin(mongooseAutoIncrement.plugin, {model: 'Comic', field: 'comicId'});
@@ -25,13 +25,15 @@ var comicCollection = mongoose.model("Comic", comicSchema);
 
 router.get("/getComicData", function (req, res) {
 
+    console.log(req.param("comicId"));
+
     comicCollection.nextCount(function(err, count) {
 
         var latestComicId = count - 1;
 
         var requestedComicId = req.param("comicId") || req.param("comicId") === 0 ? 0 : latestComicId;
 
-        comicCollection.findOne({comicId: requestedComicId}, null, function(err, comic){
+        comicCollection.findOne({comicId: requestedComicId, disabled: false}, null, function(err, comic){
 
             comic.latestComicId = latestComicId;
             res.json(comic);
@@ -44,7 +46,7 @@ router.get("/getComicData", function (req, res) {
 
 router.get("/getComicArchive", function (req, res) {
 
-    comicCollection.find({}, 'title date comicId', function(err, comics) {
+    comicCollection.find({disabled: false}, 'title date comicId', function(err, comics) {
 
         res.json({comics: comics});
 
@@ -56,12 +58,12 @@ router.post("/addComic", function (req, res) {
 
     var newComic = new comicCollection({
         comicImageUrl: req.param("comicImageUrl") || "",
-        comicSwfUrl: req.param("comicSwfUrl") || "",
-        comicYoutubeEmbed: req.param("comicYoutubeEmbed") || "",
+        comicEmbed: req.param("comicYoutubeEmbed") || "",
         altText: req.param("altText") || "",
         description: req.param("description") || "",
         title: req.param("title") || "Untitled",
-        date: req.param("date") || new Date()
+        date: req.param("date") || new Date(),
+        disabled: req.param("disabled") || false
     });
 
     newComic.save(function(err){
@@ -74,6 +76,7 @@ router.post("/addComic", function (req, res) {
 
 router.put("/editComic", function (req, res) {
 
+    console.log(req.params, req.param('comicId'));
     comicCollection.update({comicId: req.param('comicId')}, req.body, null, function(err){
 
         res.json({success: true});

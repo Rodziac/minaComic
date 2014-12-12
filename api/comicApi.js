@@ -10,6 +10,8 @@ var comicSchema = mongoose.Schema(
     {
         comicId: Number,
         latestComicId: Number,
+        prevId: Number,
+        nextId: Number,
         comicImageUrl: String,
         comicEmbed: String,
         altText: String,
@@ -29,12 +31,33 @@ router.get("/getComicData", function (req, res) {
 
         var latestComicId = count - 1;
 
-        var requestedComicId = req.param("comicId") == 'undefined' ? latestComicId : req.param("comicId");
+        var requestedComicId = parseInt(req.param("comicId") == 'undefined' ? latestComicId : req.param("comicId"), 10);
 
         comicCollection.findOne({comicId: requestedComicId, disabled: false}, null, function(err, comic){
 
             comic.latestComicId = latestComicId;
-            res.json(comic);
+
+            comicCollection.findOne({disabled: false}).where('comicId').lt(requestedComicId).sort('-comicId').select('comicId').exec(function(err, prevComic) {
+
+                if(prevComic) {
+
+                    comic.prevId = prevComic.comicId;
+
+                }
+
+                comicCollection.findOne({disabled: false}).where('comicId').gt(requestedComicId).sort('comicId').select('comicId').exec(function(err, nextComic) {
+
+                    if(nextComic) {
+
+                        comic.nextId = nextComic.comicId;
+
+                    }
+
+                    res.json(comic);
+
+                });
+
+            });
 
         });
 

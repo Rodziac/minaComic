@@ -27,11 +27,11 @@ MICO.Views.Archive.pageContents = function(opt_data, opt_ignored) {
 MICO.Views.Archive.archiveList = function(opt_data, opt_ignored) {
   opt_data = opt_data || {};
   var output = '<ul>';
-  var comicList70 = opt_data.params.comics;
-  var comicListLen70 = comicList70.length;
-  for (var comicIndex70 = 0; comicIndex70 < comicListLen70; comicIndex70++) {
-    var comicData70 = comicList70[comicIndex70];
-    output += '<li><a href="/comic/' + comicData70.comicId + '">' + comicData70.title + ' - ' + comicData70.date + '</a></li>';
+  var comicList8 = opt_data.params.comics;
+  var comicListLen8 = comicList8.length;
+  for (var comicIndex8 = 0; comicIndex8 < comicListLen8; comicIndex8++) {
+    var comicData8 = comicList8[comicIndex8];
+    output += '<li><a href="/comic/' + comicData8.comicId + '">' + comicData8.title + ' - ' + comicData8.date + '</a></li>';
   }
   output += '</ul>';
   return output;

@@ -27,7 +27,7 @@ MICO.Views.Comic.pageContents = function(opt_data, opt_ignored) {
  */
 MICO.Views.Comic.comicNavigation = function(opt_data, opt_ignored) {
   opt_data = opt_data || {};
-  return ((opt_data.params.prevId) ? '<span class="deactive navFirst"></span>' : '<a class="navFirst" href="/comic/0">First</a>') + ((opt_data.params.prevId) ? '<span class="deactive navPrevious"></span>' : '<a class="navPrevious" href="/comic/' + opt_data.params.prevId + '">Previous</a>') + '<a class="navRandom" href="/comic/' + Math.floor(Math.random() * opt_data.params.latestComicId) + '">Random</a>' + ((opt_data.params.nextId) ? '<span class="deactive navNext"></span>' : '<a class="navNext" href="/comic/' + opt_data.params.nextId + '">Next</a>') + ((opt_data.params.nextId) ? '<span class="deactive navLatest"></span>' : '<a class="navLatest" href="/comic/' + opt_data.params.latestComicId + '">Latest</a>');
+  return ((opt_data.params.prevId || opt_data.params.prevId == 0) ? '<a class="navFirst" href="/comic/0">First</a>' : '<span class="deactive navFirst"></span>') + ((opt_data.params.prevId || opt_data.params.prevId == 0) ? '<a class="navPrevious" href="/comic/' + opt_data.params.prevId + '">Previous</a>' : '<span class="deactive navPrevious"></span>') + '<a class="navRandom" href="/comic/' + Math.floor(Math.random() * opt_data.params.latestComicId) + '">Random</a>' + ((opt_data.params.nextId) ? '<a class="navNext" href="/comic/' + opt_data.params.nextId + '">Next</a>' : '<span class="deactive navNext"></span>') + ((opt_data.params.nextId) ? '<a class="navLatest" href="/comic/' + opt_data.params.latestComicId + '">Latest</a>' : '<span class="deactive navLatest"></span>');
 };
 
 

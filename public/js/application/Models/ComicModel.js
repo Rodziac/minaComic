@@ -105,7 +105,11 @@ MICO.Models.ComicModel.prototype.editComic = function(callback) {
  */
 MICO.Models.ComicModel.prototype.deleteComic = function(callback) {
 
-    this.del('/api/comic/deleteComic', this.comicData, function(response) {
+    var params = {
+        "comicId": this.comicId
+    };
+
+    this.del('/api/comic/deleteComic', params, function(response) {
 
         callback.call(this, response);
 

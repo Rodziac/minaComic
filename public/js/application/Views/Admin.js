@@ -61,11 +61,11 @@ MICO.Views.Admin.postEditor = function(opt_data, opt_ignored) {
 MICO.Views.Admin.postList = function(opt_data, opt_ignored) {
   opt_data = opt_data || {};
   var output = '<select size="10" class="comicsList" name="comicsList">';
-  var comicList49 = opt_data.params.comics;
-  var comicListLen49 = comicList49.length;
-  for (var comicIndex49 = 0; comicIndex49 < comicListLen49; comicIndex49++) {
-    var comicData49 = comicList49[comicIndex49];
-    output += '<option value="' + comicData49.comicId + '">' + comicData49.date + ' - ' + comicData49.title + '</option>';
+  var comicList152 = opt_data.params.comics;
+  var comicListLen152 = comicList152.length;
+  for (var comicIndex152 = 0; comicIndex152 < comicListLen152; comicIndex152++) {
+    var comicData152 = comicList152[comicIndex152];
+    output += '<option value="' + comicData152.comicId + '">' + comicData152.date + ' - ' + comicData152.title + '</option>';
   }
   output += '</select><span class="submitBtn">Submit</span><span class="deleteBtn">Delete</span>';
   return output;

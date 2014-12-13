@@ -77,8 +77,6 @@ router.get("/getComicArchive", function (req, res) {
 
 router.post("/addComic", function (req, res) {
 
-    console.log(req.param("title"));
-
     var newComic = new comicCollection({
         comicImageUrl: req.param("comicImageUrl") || "",
         comicEmbed: req.param("comicYoutubeEmbed") || "",
@@ -98,8 +96,7 @@ router.post("/addComic", function (req, res) {
 });
 
 router.put("/editComic", function (req, res) {
-debugger;
-    console.log(req.body, req.param('comicId'));
+
     comicCollection.update({comicId: req.param('comicId')}, req.body, null, function(err){
 
         res.json({success: true});

@@ -220,7 +220,13 @@ MICO.Controllers.AdminController.prototype.renderPostList = function() {
 
         goog.events.listen(deleteBtn, goog.events.EventType.CLICK, function(e) {
 
+            that.comicModel.comicId = goog.dom.getElementByClass("comicsList").selectedOptions[0].value;
 
+            that.comicModel.deleteComic(function(response){
+
+                alert("DONE!")
+
+            });
 
         });
 

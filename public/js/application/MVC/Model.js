@@ -2,7 +2,6 @@ goog.provide('MICO.MVC.Model');
 
 goog.require('goog.structs.Map');
 goog.require('goog.net.XhrManager');
-goog.require('goog.labs.net.xhr.ResponseType');
 goog.require('goog.Uri.QueryData');
 goog.require('goog.string');
 goog.require('goog.json.Serializer');
@@ -13,8 +12,8 @@ goog.require('goog.json.Serializer');
  */
 MICO.MVC.Model = function() {
 
-    var xhrHeader = new goog.structs.Map({'Content-Type': 'application-json'});
-    this.closureXhr = new goog.net.XhrManager(3, xhrHeader, 1, 10, 30000);
+    this.xhrHeader = new goog.structs.Map({'Content-Type': 'application/json'});
+    this.closureXhr = new goog.net.XhrManager(3, this.xhrHeader, 1, 10, 30000);
 
 };
 
@@ -37,9 +36,7 @@ MICO.MVC.Model.prototype.get = function(url, reqBody, callback) {
  */
 MICO.MVC.Model.prototype.post = function(url, reqBody, callback) {
 
-    var request = goog.Uri.QueryData.createFromMap(reqBody);
-
-    this.closureXhr.send(goog.string.getRandomString(), url, 'POST', request, undefined, undefined, function(response){
+    this.closureXhr.send(goog.string.getRandomString(), url, 'POST', goog.json.serialize(reqBody), this.xhrHeader, undefined, function(response){
         callback.call(this, response.target.getResponseJson());
     });
 
@@ -50,9 +47,7 @@ MICO.MVC.Model.prototype.post = function(url, reqBody, callback) {
  */
 MICO.MVC.Model.prototype.put = function(url, reqBody, callback) {
 
-    var request = goog.Uri.QueryData.createFromMap(reqBody);
-
-    this.closureXhr.send(goog.string.getRandomString(), url, 'PUT', request, undefined, undefined, function(response){
+    this.closureXhr.send(goog.string.getRandomString(), url, 'PUT', goog.json.serialize(reqBody), this.xhrHeader, undefined, function(response){
         callback.call(this, response.target.getResponseJson());
     });
 
@@ -63,7 +58,7 @@ MICO.MVC.Model.prototype.put = function(url, reqBody, callback) {
  */
 MICO.MVC.Model.prototype.del = function(url, reqBody, callback) {
 
-    this.closureXhr.send(goog.string.getRandomString(), url, 'DELETE', reqBody, undefined, undefined, function(response){
+    this.closureXhr.send(goog.string.getRandomString(), url, 'DELETE', goog.json.serializ(reqBody), this.xhrHeader, undefined, function(response){
         callback.call(this, response.target.getResponseJson());
     });
 

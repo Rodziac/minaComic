@@ -58,7 +58,7 @@ MICO.MVC.Model.prototype.put = function(url, reqBody, callback) {
  */
 MICO.MVC.Model.prototype.del = function(url, reqBody, callback) {
 
-    this.closureXhr.send(goog.string.getRandomString(), url, 'DELETE', goog.json.serializ(reqBody), this.xhrHeader, undefined, function(response){
+    this.closureXhr.send(goog.string.getRandomString(), url, 'DELETE', goog.json.serialize(reqBody), this.xhrHeader, undefined, function(response){
         callback.call(this, response.target.getResponseJson());
     });
 

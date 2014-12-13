@@ -32,4 +32,13 @@ router.put("/setContent", function(req, res) {
     });
 });
 
-//TODO: Get content types
+router.get("/getAllContentTypes", function(req, res) {
+
+    contentCollection.find({}, "contentType", function(err, content) {
+
+        res.json(content);
+
+    });
+
+
+});

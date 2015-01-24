@@ -33,11 +33,11 @@
  * @param? params comic data
  */
 {template .comicNavigation}
-    {if $params.prevId or $params.prevId == 0}<a class="navFirst" href="/comic/0">First</a>{else}<span class="deactive navFirst"></span>{/if}
-    {if $params.prevId or $params.prevId == 0}<a class="navPrevious" href="/comic/{$params.prevId}">Previous</a>{else}<span class="deactive navPrevious"></span>{/if}
-    <a class="navRandom" href="/comic/{randomInt($params.latestComicId)}">Random</a>
-    {if $params.nextId}<a class="navNext" href="/comic/{$params.nextId}">Next</a>{else}<span class="deactive navNext"></span>{/if}
-    {if $params.nextId}<a class="navLatest" href="/comic/{$params.latestComicId}">Latest</a>{else}<span class="deactive navLatest"></span>{/if}
+    <a class="navIcon navFirst {if not $params.prevId or $params.prevId == 0}deactive{/if}" href="{if $params.prevId or $params.prevId == 0}/comic/0{else}javascript:;{/if}" title="First"></a>
+    <a class="navIcon navPrevious {if not $params.prevId or $params.prevId == 0}deactive{/if}" href="{if $params.prevId or $params.prevId == 0}/comic/{$params.prevId}{else}javascript:;{/if}" title="Previous"></a>
+    <a class="navIcon navRandom" href="/comic/{randomInt($params.latestComicId)}" title="Random"></a>
+    <a class="navIcon navNext {if not $params.nextId}deactive{/if}" href="{if $params.nextId}/comic/{$params.nextId}{else}javascript:;{/if}" title="Next"></a>
+    <a class="navIcon navLatest {if not $params.nextId}deactive{/if}" href="{if $params.nextId}/comic/{$params.latestComicId}{else}javascript:;{/if}" title="Latest"></a>
 {/template}
 
 /**

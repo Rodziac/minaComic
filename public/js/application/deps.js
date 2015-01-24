@@ -5,8 +5,9 @@ goog.addDependency('../../../../../js/application/Controllers/AdminController.js
 goog.addDependency('../../../../../js/application/Controllers/ArchiveController.js', ['MICO.Controllers.ArchiveController'], ['MICO.MVC.Controller', 'MICO.Models.ComicModel', 'MICO.Views.Archive', 'MICO.Views.Layout']);
 goog.addDependency('../../../../../js/application/Controllers/ComicController.js', ['MICO.Controllers.ComicController'], ['MICO.MVC.Controller', 'MICO.Models.ComicModel', 'MICO.Views.Comic', 'MICO.Views.Layout']);
 goog.addDependency('../../../../../js/application/Controllers/RouteController.js', ['MICO.Controllers.RouteController'], ['MICO.Controllers.AboutController', 'MICO.Controllers.AdminController', 'MICO.Controllers.ArchiveController', 'MICO.Controllers.ComicController', 'MICO.MVC.Controller', 'goog.dom.classlist', 'goog.history.Html5History', 'goog.string']);
+goog.addDependency('../../../../../js/application/Library/LayoutHelper.js', ['MICO.LayoutHelper'], []);
 goog.addDependency('../../../../../js/application/MVC/Controller.js', ['MICO.MVC.Controller'], ['goog.dom']);
-goog.addDependency('../../../../../js/application/MVC/Model.js', ['MICO.MVC.Model'], ['goog.Uri.QueryData', 'goog.json.Serializer', 'goog.labs.net.xhr.ResponseType', 'goog.net.XhrManager', 'goog.string', 'goog.structs.Map']);
+goog.addDependency('../../../../../js/application/MVC/Model.js', ['MICO.MVC.Model'], ['goog.Uri.QueryData', 'goog.json.Serializer', 'goog.net.XhrManager', 'goog.string', 'goog.structs.Map']);
 goog.addDependency('../../../../../js/application/MVC/View.js', ['MICO.MVC.View'], []);
 goog.addDependency('../../../../../js/application/Models/ComicModel.js', ['MICO.Models.ComicModel'], ['MICO.MVC.Model']);
 goog.addDependency('../../../../../js/application/Models/ContentModel.js', ['MICO.Models.ContentModel'], ['MICO.MVC.Model']);
@@ -16,7 +17,7 @@ goog.addDependency('../../../../../js/application/Views/Archive.js', ['MICO.View
 goog.addDependency('../../../../../js/application/Views/Comic.js', ['MICO.Views.Comic'], ['soy', 'soydata']);
 goog.addDependency('../../../../../js/application/Views/Index.js', ['MICO.Views.Index'], ['soy', 'soydata']);
 goog.addDependency('../../../../../js/application/Views/Layout.js', ['MICO.Views.Layout'], ['soy', 'soydata']);
-goog.addDependency('../../../../../js/application/application.js', ['MICO.Application'], ['MICO.Controllers.RouteController', 'MICO.Views.Layout', 'goog.array']);
+goog.addDependency('../../../../../js/application/application.js', ['MICO.Application'], ['MICO.Controllers.RouteController', 'MICO.LayoutHelper', 'MICO.Views.Layout', 'goog.array']);
 goog.addDependency('../../../../../js/application/bootstrapper.js', ['MICO.Bootstrapper'], ['MICO.Application', 'MICO.MVC.Controller', 'MICO.MVC.Model', 'MICO.MVC.View']);
 goog.addDependency('../../../../../js/closure-library/closure/goog/a11y/aria/announcer.js', ['goog.a11y.aria.Announcer'], ['goog.Disposable', 'goog.a11y.aria', 'goog.a11y.aria.LivePriority', 'goog.a11y.aria.State', 'goog.dom', 'goog.object']);
 goog.addDependency('../../../../../js/closure-library/closure/goog/a11y/aria/announcer_test.js', ['goog.a11y.aria.AnnouncerTest'], ['goog.a11y.aria', 'goog.a11y.aria.Announcer', 'goog.a11y.aria.LivePriority', 'goog.a11y.aria.State', 'goog.array', 'goog.dom', 'goog.dom.iframe', 'goog.testing.jsunit']);

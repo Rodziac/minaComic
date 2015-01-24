@@ -252,7 +252,7 @@ MICO.Controllers.AdminController.prototype.renderContentEditor = function() {
 
 };
 
-MICO.Controllers.AdminController.prototype.headerTemplate = MICO.Views.Layout.adminHeader;
+MICO.Controllers.AdminController.prototype.headerTemplate = MICO.Views.Layout.header;
 MICO.Controllers.AdminController.prototype.pageContents = MICO.Views.Admin.pageContents;
 MICO.Controllers.AdminController.prototype.postEditor = MICO.Views.Admin.postEditor;
 MICO.Controllers.AdminController.prototype.postList = MICO.Views.Admin.postList;

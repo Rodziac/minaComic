@@ -52,6 +52,6 @@ MICO.Controllers.ComicController.prototype.renderPageContent = function(comicId)
 
 };
 
-MICO.Controllers.ComicController.prototype.headerTemplate = MICO.Views.Layout.userHeader;
-MICO.Controllers.ComicController.prototype.footerTemplate = MICO.Views.Layout.userFooter;
+MICO.Controllers.ComicController.prototype.headerTemplate = MICO.Views.Layout.header;
+MICO.Controllers.ComicController.prototype.footerTemplate = MICO.Views.Layout.footer;
 MICO.Controllers.ComicController.prototype.pageContents = MICO.Views.Comic.pageContents;

@@ -24,8 +24,8 @@ MICO.Views.Layout.mainLayout = function(opt_data, opt_ignored) {
  * @return {string}
  * @notypecheck
  */
-MICO.Views.Layout.userHeader = function(opt_data, opt_ignored) {
-  return '<div class="logoContainer"><a href="/"></a></div><div class="socialContainer">' + MICO.Views.Layout.socialProfiles(opt_data) + '</div><div class="pageNavigator"><ul><li class="home"><a href="/">Home</a></li><li class="archive"><a href="/archive">Archive</a></li><li class="about"><a href="/about">About</a></li></ul></div>';
+MICO.Views.Layout.header = function(opt_data, opt_ignored) {
+  return '<div class="logoContainer"><a href="/"><img src="http://placehold.it/200x75"></a></div><div class="pageNavigator"><a href="/">Home</a><a href="/archive">Archive</a><a href="/about">About</a></div><div class="socialContainer">' + MICO.Views.Layout.socialProfiles(opt_data) + '</div>';
 };
 
 
@@ -35,7 +35,7 @@ MICO.Views.Layout.userHeader = function(opt_data, opt_ignored) {
  * @return {string}
  * @notypecheck
  */
-MICO.Views.Layout.userFooter = function(opt_data, opt_ignored) {
+MICO.Views.Layout.footer = function(opt_data, opt_ignored) {
   return '<div class="copyright"> Copyright 2014-2015 boobs</div><div class="socialContainer">' + MICO.Views.Layout.socialProfiles(opt_data) + '</div>';
 };
 
@@ -47,16 +47,5 @@ MICO.Views.Layout.userFooter = function(opt_data, opt_ignored) {
  * @notypecheck
  */
 MICO.Views.Layout.socialProfiles = function(opt_data, opt_ignored) {
-  return '<ul><li><a href="http://facebook.com" class="externalLink social facebook">Facebook</a></li><li><a href="http://tumblr.com" class="externalLink social tumblr">Tumblr</a></li><li><a href="http://youtube.com" class="externalLink social youtube">Youtube</a></li><li><a href="http://newgrounds.com" class="externalLink social newgrounds">Newgrounds</a></li></ul>';
-};
-
-
-/**
- * @param {Object.<string, *>=} opt_data
- * @param {(null|undefined)=} opt_ignored
- * @return {string}
- * @notypecheck
- */
-MICO.Views.Layout.adminHeader = function(opt_data, opt_ignored) {
-  return '<div class="logoContainer"><a href="/admin"></a></div><div class="pageNavigator"><ul><li class="home"><a href="/">Home</a></li><li class="admin"><a href="/admin">Admin</a></li><li class="archive"><a href="/archive">Archive</a></li><li class="about"><a href="/about">About</a></li></ul></div>';
+  return '<a href="http://facebook.com" class="externalLink social facebook" title="Facebook"></a><a href="http://tumblr.com" class="externalLink social tumblr" title="Tumblr"></a><a href="http://youtube.com" class="externalLink social youtube" title="Youtube"></a><a href="http://newgrounds.com" class="externalLink social newgrounds" title="Newgrounds"></a><a href="http://twitter.com" class="externalLink social twitter" title="Twitter"></a><a href="http://google.com.com" class="externalLink social google" title="Google"><img src="http://placehold.it/57x34"></a>';
 };

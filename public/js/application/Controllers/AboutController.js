@@ -53,6 +53,6 @@ MICO.Controllers.AboutController.prototype.renderPageContent = function() {
 
 
 
-MICO.Controllers.AboutController.prototype.headerTemplate = MICO.Views.Layout.userHeader;
-MICO.Controllers.AboutController.prototype.footerTemplate = MICO.Views.Layout.userFooter;
+MICO.Controllers.AboutController.prototype.headerTemplate = MICO.Views.Layout.header;
+MICO.Controllers.AboutController.prototype.footerTemplate = MICO.Views.Layout.footer;
 MICO.Controllers.AboutController.prototype.pageContents = MICO.Views.About.pageContents;

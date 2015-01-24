@@ -50,7 +50,7 @@ MICO.Controllers.ArchiveController.prototype.renderPageContent = function() {
 
 };
 
-MICO.Controllers.ArchiveController.prototype.headerTemplate = MICO.Views.Layout.userHeader;
-MICO.Controllers.ArchiveController.prototype.footerTemplate = MICO.Views.Layout.userFooter;
+MICO.Controllers.ArchiveController.prototype.headerTemplate = MICO.Views.Layout.header;
+MICO.Controllers.ArchiveController.prototype.footerTemplate = MICO.Views.Layout.footer;
 MICO.Controllers.ArchiveController.prototype.pageContents = MICO.Views.Archive.pageContents;
 MICO.Controllers.ArchiveController.prototype.archiveList = MICO.Views.Archive.archiveList;

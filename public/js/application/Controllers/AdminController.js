@@ -90,7 +90,7 @@ MICO.Controllers.AdminController.prototype.renderPostEditor = function(postData)
 
     this.render(this.postEditor, postData || {}, goog.dom.getElement("tabContent"));
 
-    MICO.Utils.renderTextEditor("descriptionText", "descriptionEditorToolbox");
+    var descriptionEditor = MICO.Utils.renderTextEditor("descriptionText", "descriptionEditorToolbox");
 
     var PATTERN = "MM'/'dd'/'yyyy";
     var formatter = new goog.i18n.DateTimeFormat(PATTERN);
@@ -109,7 +109,7 @@ MICO.Controllers.AdminController.prototype.renderPostEditor = function(postData)
         var comicData = {
             "comicId": goog.dom.getElementByClass("comicId").value,
             "title": goog.dom.getElementByClass("title").value,
-            "description": "",//descriptionEditor.getFieldCopy().innerHTML,
+            "description": descriptionEditor.getFieldCopy().innerHTML,
             "altText": goog.dom.getElementByClass("altText").value,
             "disabled": isDisabled.isSelected(),
             "embed": goog.dom.getElementByClass("mediaEmbedCode").value,
@@ -215,11 +215,19 @@ MICO.Controllers.AdminController.prototype.renderContentEditor = function() {
     });
 
     goog.events.listen(comboBox, 'change', function(e) {
-        //Set content of editor to selected content type
+
+        that.contentModel.contentType = e.target.getValue();
+
+        that.contentModel.getContent(function(response){
+
+            //Set content of editor to content in response
+
+        });
+
     });
 
 
-    MICO.Utils.renderTextEditor("contentText", "contentToolbar");
+    var descriptionEditor = MICO.Utils.renderTextEditor("contentText", "contentToolbar");
 
     var submitBtn = goog.dom.getElementByClass("submitBtn");
     goog.events.listen(submitBtn, goog.events.EventType.CLICK, function(e) {
@@ -228,7 +236,7 @@ MICO.Controllers.AdminController.prototype.renderContentEditor = function() {
             "contentType": comboBox.getValue(),
             "contentDescription": "",
             "title": "",
-            "description": ""
+            "content": descriptionEditor.getFieldCopy().innerHTML
         };
 
         that.contentModel.setContent(function(response){

@@ -48,6 +48,16 @@ MICO.Models.ComicModel.prototype.getComicData = function(callback) {
 
 };
 
+MICO.Models.ComicModel.prototype.getRandomComicId = function(callback) {
+
+    this.get('/api/comic/getRandomComic', {}, function(response) {
+
+        callback.call(this, response);
+
+    });
+
+};
+
 /**
  * Get simple list of all comics
  * Example:

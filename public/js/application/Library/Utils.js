@@ -60,14 +60,18 @@ MICO.Utils.renderTextEditor = function(textFieldId, toolbarFieldId) {
         goog.editor.Command.REMOVE_FORMAT
     ];
 
+    var descriptionEditor = null;
+
     var toolboxElement = goog.dom.getElement(toolbarFieldId);
     if(toolboxElement) {
         var descriptionEditorToolbox = goog.ui.editor.DefaultToolbar.makeToolbar(buttons, toolboxElement);
 
         // Hook the toolbar into the field.
-        var descriptionEditor = new goog.ui.editor.ToolbarController(descriptionField, descriptionEditorToolbox);
+        descriptionEditor = new goog.ui.editor.ToolbarController(descriptionField, descriptionEditorToolbox);
     }
 
     descriptionField.makeEditable();
+
+    return descriptionEditor;
 
 };

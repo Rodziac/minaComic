@@ -21,7 +21,7 @@ goog.inherits(MICO.Models.ContentModel, MICO.MVC.Model);
  *      contentType: string,
  *      contentDescription: string,
  *      title: string,
- *      description: string
+ *      content: string
  * }
  * @param {function(Object)} callback callback function
  */

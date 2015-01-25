@@ -8,7 +8,7 @@ var contentSchema = mongoose.Schema({
     contentType: String,
     contentDescription: String,
     title: String,
-    description: String
+    content: String
 });
 
 var contentCollection = mongoose.model("Content", contentSchema);

@@ -45,7 +45,12 @@ MICO.Controllers.ComicController.prototype.renderPageContent = function(comicId)
     this.model.comicId = comicId;
     this.model.getComicData(function(response){
 
-        that.render(that.pageContents, response, goog.dom.getElement("content"));
+        that.model.getRandomComicId(function(randomComic){
+
+            response["randomComicId"] = randomComic["comicId"];
+            that.render(that.pageContents, response, goog.dom.getElement("content"));
+
+        });
 
     });
 

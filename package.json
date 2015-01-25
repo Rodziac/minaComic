@@ -10,7 +10,8 @@
         "express": "*",
         "mongoose": "*",
         "body-parser": "*",
-        "mongoose-auto-increment": "*"
+        "mongoose-auto-increment": "*",
+        "mongoose-random": "*"
     },
     "engines": {
         "node": "0.10.35",

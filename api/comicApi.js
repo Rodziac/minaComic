@@ -1,6 +1,7 @@
 var express = require('express');
 var mongoose = require('mongoose');
 var mongooseAutoIncrement = require('mongoose-auto-increment');
+var random = require('mongoose-random');
 
 var router = express.Router();
 
@@ -22,8 +23,11 @@ var comicSchema = mongoose.Schema(
     }
 );
 comicSchema.plugin(mongooseAutoIncrement.plugin, {model: 'Comic', field: 'comicId'});
+comicSchema.plugin(random, { path: 'r' });
 
 var comicCollection = mongoose.model("Comic", comicSchema);
+
+comicCollection.syncRandom(function (err, result) {});
 
 router.get("/getComicData", function (req, res) {
 
@@ -91,6 +95,8 @@ router.post("/addComic", function (req, res) {
 
         res.json({success: true});
 
+        comicCollection.syncRandom(function (err, result) {});
+
     });
 
 });
@@ -100,6 +106,7 @@ router.put("/editComic", function (req, res) {
     comicCollection.update({comicId: req.param('comicId')}, req.body, null, function(err){
 
         res.json({success: true});
+        comicCollection.syncRandom(function (err, result) {});
 
     });
 
@@ -110,6 +117,20 @@ router.delete("/deleteComic", function (req, res) {
     comicCollection.remove({comicId: req.param('comicId')}, function(err){
 
         res.json({success: true});
+        comicCollection.syncRandom(function (err, result) {});
+
+    });
+
+});
+
+router.get("/getRandomComic", function(req, res) {
+
+    var filter = { disabled: false };
+    var fields = { comicId: 1 };
+    var options = { limit: 1 };
+    comicCollection.findRandom(filter, fields, options, function (err, comic) {
+
+        res.json(comic[0]);
 
     });
 

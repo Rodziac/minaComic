@@ -53,4 +53,16 @@ MICO.Models.ContentModel.prototype.setContent = function(callback) {
 
 };
 
-//TODO: Get content types
+/**
+ * todo: //
+ * @param callback
+ */
+MICO.Models.ContentModel.prototype.getContentTypes = function(callback) {
+
+    this.get('/api/content/getAllContentTypes', {}, function(response) {
+
+        callback.call(this, response);
+
+    });
+
+};

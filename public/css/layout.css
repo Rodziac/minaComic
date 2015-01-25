@@ -80,3 +80,16 @@ a:visited, a:hover, a { color: inherit; }
 #footer .socialContainer .social.youtube { background-position: 0 -136px; }
 #footer .socialContainer .social.newgrounds { background-position: 0 -34px; }
 #footer .socialContainer .social.tumblr { background-position: 0 -68px; }
+
+
+/*
+//    ####  ####### ##   ## ####### ######    ##   ####
+//   ##  ##  ##   # ###  ##  ##   #  ##  ##  ####   ##
+//  ##       ## #   #### ##  ## #    ##  ## ##  ##  ##
+//  ##       ####   ## ####  ####    #####  ##  ##  ##
+//  ##  ###  ## #   ##  ###  ## #    ## ##  ######  ##   #
+//   ##  ##  ##   # ##   ##  ##   #  ##  ## ##  ##  ##  ##
+//    ##### ####### ##   ## ####### #### ## ##  ## #######
+//
+*/
+.button { display: inline-block; padding: 5px 20px; background-color: #FFBD96; border: 1px solid #6A2A04; border-radius: 8px; margin: 0 10px; }

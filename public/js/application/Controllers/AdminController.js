@@ -3,22 +3,8 @@ goog.provide("MICO.Controllers.AdminController");
 goog.require("goog.ui.TabBar");
 goog.require("goog.ui.LabelInput");
 goog.require("goog.ui.decorate");
-
+goog.require('goog.ui.ComboBox');
 goog.require('goog.ui.Checkbox');
-goog.require('goog.editor.Command');
-goog.require('goog.editor.Field');
-goog.require('goog.editor.plugins.BasicTextFormatter');
-goog.require('goog.editor.plugins.EnterHandler');
-goog.require('goog.editor.plugins.HeaderFormatter');
-goog.require('goog.editor.plugins.LinkBubble');
-goog.require('goog.editor.plugins.LinkDialogPlugin');
-goog.require('goog.editor.plugins.ListTabHandler');
-goog.require('goog.editor.plugins.LoremIpsum');
-goog.require('goog.editor.plugins.RemoveFormatting');
-goog.require('goog.editor.plugins.SpacesTabHandler');
-goog.require('goog.editor.plugins.UndoRedo');
-goog.require('goog.ui.editor.DefaultToolbar');
-goog.require('goog.ui.editor.ToolbarController');
 goog.require('goog.i18n.DateTimeFormat');
 goog.require('goog.i18n.DateTimeParse');
 goog.require('goog.ui.InputDatePicker');
@@ -31,6 +17,7 @@ goog.require("MICO.Models.ContentModel");
 goog.require("MICO.Views.Layout");
 goog.require("MICO.Views.Admin");
 
+goog.require("MICO.Utils");
 
 /**
  * Class that handles routing and navigation.
@@ -103,56 +90,7 @@ MICO.Controllers.AdminController.prototype.renderPostEditor = function(postData)
 
     this.render(this.postEditor, postData || {}, goog.dom.getElement("tabContent"));
 
-    var descriptionField = new goog.editor.Field('descriptionText');
-
-    // Create and register all of the editing plugins you want to use.
-    descriptionField.registerPlugin(new goog.editor.plugins.BasicTextFormatter());
-    descriptionField.registerPlugin(new goog.editor.plugins.RemoveFormatting());
-    descriptionField.registerPlugin(new goog.editor.plugins.UndoRedo());
-    descriptionField.registerPlugin(new goog.editor.plugins.ListTabHandler());
-    descriptionField.registerPlugin(new goog.editor.plugins.SpacesTabHandler());
-    descriptionField.registerPlugin(new goog.editor.plugins.EnterHandler());
-    descriptionField.registerPlugin(new goog.editor.plugins.HeaderFormatter());
-    descriptionField.registerPlugin(
-        new goog.editor.plugins.LoremIpsum('Click here to edit'));
-    descriptionField.registerPlugin(
-        new goog.editor.plugins.LinkDialogPlugin());
-    descriptionField.registerPlugin(new goog.editor.plugins.LinkBubble());
-
-    // Specify the buttons to add to the toolbar, using built in default buttons.
-    var buttons = [
-        goog.editor.Command.BOLD,
-        goog.editor.Command.ITALIC,
-        goog.editor.Command.UNDERLINE,
-        goog.editor.Command.FONT_COLOR,
-        goog.editor.Command.BACKGROUND_COLOR,
-        goog.editor.Command.FONT_FACE,
-        goog.editor.Command.FONT_SIZE,
-        goog.editor.Command.LINK,
-        goog.editor.Command.UNDO,
-        goog.editor.Command.REDO,
-        goog.editor.Command.UNORDERED_LIST,
-        goog.editor.Command.ORDERED_LIST,
-        goog.editor.Command.INDENT,
-        goog.editor.Command.OUTDENT,
-        goog.editor.Command.JUSTIFY_LEFT,
-        goog.editor.Command.JUSTIFY_CENTER,
-        goog.editor.Command.JUSTIFY_RIGHT,
-        goog.editor.Command.SUBSCRIPT,
-        goog.editor.Command.SUPERSCRIPT,
-        goog.editor.Command.STRIKE_THROUGH,
-        goog.editor.Command.REMOVE_FORMAT
-    ];
-
-    var toolboxElement = goog.dom.getElement('descriptionEditorToolbox');
-    if(toolboxElement) {
-        var descriptionEditorToolbox = goog.ui.editor.DefaultToolbar.makeToolbar(buttons, toolboxElement);
-
-        // Hook the toolbar into the field.
-        var descriptionEditor = new goog.ui.editor.ToolbarController(descriptionField, descriptionEditorToolbox);
-    }
-
-    descriptionField.makeEditable();
+    MICO.Utils.renderTextEditor("descriptionText", "descriptionEditorToolbox");
 
     var PATTERN = "MM'/'dd'/'yyyy";
     var formatter = new goog.i18n.DateTimeFormat(PATTERN);
@@ -251,16 +189,55 @@ MICO.Controllers.AdminController.prototype.renderPostList = function() {
  */
 MICO.Controllers.AdminController.prototype.renderContentEditor = function() {
 
-    this.contentModel.contentData = {};
+    var that = this;
 
-    //render
+    this.render(this.contentEditor, {}, goog.dom.getElement("tabContent"));
 
-    //init combobox on contentType
+    var comboElement = goog.dom.getElement('contentType');
+    var comboBox = new goog.ui.ComboBox();
+    comboBox.setUseDropdownArrow(true);
+    comboBox.setDefaultText('Select a content type...');
 
-    //init editor on contentEditorContainer
+    this.contentModel.getContentTypes(function(contentTypes){
 
-    //bind click on submitBtn
+        goog.array.forEach(contentTypes, function(contentType){
 
+            comboBox.addItem(new goog.ui.ComboBoxItem(contentType));
+
+        });
+
+        var newContent = new goog.ui.ComboBoxItem('New Content');
+        newContent.setSticky(true);
+        comboBox.addItem(newContent);
+
+        comboBox.render(comboElement);
+
+    });
+
+    goog.events.listen(comboBox, 'change', function(e) {
+        //Set content of editor to selected content type
+    });
+
+
+    MICO.Utils.renderTextEditor("contentText", "contentToolbar");
+
+    var submitBtn = goog.dom.getElementByClass("submitBtn");
+    goog.events.listen(submitBtn, goog.events.EventType.CLICK, function(e) {
+
+        that.contentModel.contentData = {
+            "contentType": comboBox.getValue(),
+            "contentDescription": "",
+            "title": "",
+            "description": ""
+        };
+
+        that.contentModel.setContent(function(response){
+
+            alert("Done!");
+
+        });
+
+    });
 };
 
 MICO.Controllers.AdminController.prototype.headerTemplate = MICO.Views.Layout.header;

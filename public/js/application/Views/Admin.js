@@ -48,7 +48,7 @@ MICO.Views.Admin.adminPanelContents = function(opt_data, opt_ignored) {
  */
 MICO.Views.Admin.postEditor = function(opt_data, opt_ignored) {
   opt_data = opt_data || {};
-  return '<div id="postForm"><input type="text" class="comicId" disabled=disabled hidden=hidden value="' + ((opt_data.params.comicId) ? opt_data.params.comicId : '-1') + '"></input><span class="inputLabel">Title: </span><input type="text" class="title" value="' + ((opt_data.params.title) ? opt_data.params.title : '') + '"></input><span class="inputLabel">Description: </span><div class="descriptionContainer"><div id=\'descriptionEditorToolbox\'></div><div id=\'descriptionText\'>' + ((opt_data.params.description) ? opt_data.params.description : '') + '</div></div><span class="inputLabel">Alt text: </span><input type="text" class="altText" value="' + ((opt_data.params.altText) ? opt_data.params.altText : '') + '"></input><span class="inputLabel">Live date: </span><div class="comicStartDate"></div><span class="inputLabel">Disabled: </span><span class="isDisabled goog-checkbox ' + ((opt_data.params.disabled) ? 'goog-checkbox-checked' : 'goog-checkbox-unchecked') + '"></span><span class="inputLabel">Embed code: </span><textarea class="mediaEmbedCode">' + ((opt_data.params.comicEmbed) ? opt_data.params.comicEmbed : '') + '</textarea><span class="inputLabel">Comic Image: </span><input type="file" accept="image/*" class="comicImage"></input><span class="submitBtn">Submit</span><span class="resetBtn">Reset</span></div>';
+  return '<div id="postForm"><input type="text" class="comicId" disabled=disabled hidden=hidden value="' + ((opt_data.params.comicId) ? opt_data.params.comicId : '-1') + '"></input><span class="inputLabel">Title: </span><input type="text" class="title" value="' + ((opt_data.params.title) ? opt_data.params.title : '') + '"></input><span class="inputLabel">Description: </span><div class="descriptionContainer"><div id=\'descriptionEditorToolbox\'></div><div id=\'descriptionText\'>' + ((opt_data.params.description) ? opt_data.params.description : '') + '</div></div><span class="inputLabel">Alt text: </span><input type="text" class="altText" value="' + ((opt_data.params.altText) ? opt_data.params.altText : '') + '"></input><span class="inputLabel">Live date: </span><div class="comicStartDate"></div><span class="inputLabel">Disabled: </span><span class="isDisabled goog-checkbox ' + ((opt_data.params.disabled) ? 'goog-checkbox-checked' : 'goog-checkbox-unchecked') + '"></span><span class="inputLabel">Embed code: </span><textarea class="mediaEmbedCode">' + ((opt_data.params.comicEmbed) ? opt_data.params.comicEmbed : '') + '</textarea><span class="inputLabel">Comic Image: </span><input type="file" accept="image/*" class="comicImage"></input><span class="submitBtn button">Submit</span><span class="resetBtn button">Reset</span></div>';
 };
 
 
@@ -67,7 +67,7 @@ MICO.Views.Admin.postList = function(opt_data, opt_ignored) {
     var comicData167 = comicList167[comicIndex167];
     output += '<option value="' + comicData167.comicId + '">' + comicData167.date + ' - ' + comicData167.title + '</option>';
   }
-  output += '</select><span class="submitBtn">Submit</span><span class="deleteBtn">Delete</span>';
+  output += '</select><span class="submitBtn button">Submit</span><span class="deleteBtn button">Delete</span>';
   return output;
 };
 
@@ -79,6 +79,5 @@ MICO.Views.Admin.postList = function(opt_data, opt_ignored) {
  * @notypecheck
  */
 MICO.Views.Admin.contentEditor = function(opt_data, opt_ignored) {
-  opt_data = opt_data || {};
-  return '<div class="contentType"></div><div class="contentEditorContainer"><div class=\'toolbar\'></div><div class=\'contentText\'>' + opt_data.params.description + '</div></div><span class="submitBtn"></span>';
+  return '<div id="contentType" class="use-arrow"></div><div class="contentEditorContainer"><div id=\'contentToolbar\'></div><div id=\'contentText\'></div></div><span class="submitBtn button">Submit</span>';
 };

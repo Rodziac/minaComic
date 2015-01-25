@@ -58,8 +58,8 @@
     <textarea class="mediaEmbedCode">{if $params.comicEmbed}{$params.comicEmbed}{/if}</textarea>
     <span class="inputLabel">Comic Image: </span>
     <input type="file" accept="image{literal}/*{/literal}" class="comicImage"></input>
-    <span class="submitBtn">Submit</span>
-    <span class="resetBtn">Reset</span>
+    <span class="submitBtn button">Submit</span>
+    <span class="resetBtn button">Reset</span>
 </div>
 {/template}
 
@@ -72,21 +72,20 @@
 <select size="10" class="comicsList" name="comicsList">
     {foreach $comic in $params.comics}<option value="{$comic.comicId}">{$comic.date} - {$comic.title}</option>{/foreach}
 </select>
-<span class="submitBtn">Submit</span>
-<span class="deleteBtn">Delete</span>
+<span class="submitBtn button">Submit</span>
+<span class="deleteBtn button">Delete</span>
 {/template}
 
 /**
  * Content editor tab.
  * Pick content type from dropdown or add new one, then write and submit.
  * Updates if exists, creates if not.
- * @param? params content
  */
 {template .contentEditor}
-    <div class="contentType"></div>
+    <div id="contentType" class="use-arrow"></div>
     <div class="contentEditorContainer">
-      <div class='toolbar'></div>
-      <div class='contentText'>{$params.description}</div>
+      <div id='contentToolbar'></div>
+      <div id='contentText'></div>
     </div>
-    <span class="submitBtn"></span>
+    <span class="submitBtn button">Submit</span>
 {/template}

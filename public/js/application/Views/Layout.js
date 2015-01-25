@@ -25,7 +25,7 @@ MICO.Views.Layout.mainLayout = function(opt_data, opt_ignored) {
  * @notypecheck
  */
 MICO.Views.Layout.header = function(opt_data, opt_ignored) {
-  return '<div class="logoContainer"><a href="/"><img src="http://placehold.it/200x75"></a></div><div class="pageNavigator"><a href="/">Home</a><a href="/archive">Archive</a><a href="/about">About</a></div><div class="socialContainer">' + MICO.Views.Layout.socialProfiles(opt_data) + '</div>';
+  return '<div class="logoContainer"><a href="/"><img src="http://placehold.it/200x75&text=logo"></a></div><div class="pageNavigator"><a href="/">Home</a><a href="/archive">Archive</a><a href="/about">About</a></div><div class="socialContainer">' + MICO.Views.Layout.socialProfiles(opt_data) + '</div>';
 };
 
 

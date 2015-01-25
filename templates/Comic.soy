@@ -6,23 +6,23 @@
  */
 {template .pageContents}
     <div class="comicContentContainer">
-        <h2 class="comicTitleContainer">
-            {$params.date} - {$params.title}
+        <h2 class="comicTitleContainer" title="{$params.humanReadableDate}">
+            {$params.title}
         </h2>
-        <div class="advertisement wide top"></div>
+        <div class="advertisement wide top"><img src="http://placehold.it/350x65&text=top horizontal advertisement"></div>
         <div class="comicNavigation">
             {call .comicNavigation data="all" /}
         </div>
-        <div class="advertisement long left"></div>
+        <div class="advertisement long left"><img src="http://placehold.it/65x350&text=Advertisement: left vertical advertisement"></div>
         <div class="comicContainer">
             {call .comicWrapper data="all" /}
         </div>
-        <div class="advertisement long right"></div>
+        <div class="advertisement long right"><img src="http://placehold.it/65x350&text=Advertisement: left vertical advertisement"></div>
         <div class="comicNavigation">
             {call .comicNavigation data="all" /}
         </div>
-        <div class="advertisement wide bottom"></div>
-        <div class="comicContentContainer">
+        <div class="advertisement wide bottom"><img src="http://placehold.it/350x65&text=Advertisement: bottom horizontal advertisement"></div>
+        <div class="comicDescriptionContainer">
             {call .descriptionWrapper data="all" /}
         </div>
     </div>
@@ -46,9 +46,10 @@
  * @param? params comic data
  */
 {template .comicWrapper}
-    {if $params.comicImageUrl}
+    /*{if $params.comicImageUrl}*/
+    {if true}
         {if $params.comicId != $params.latestComicId} <a href="/comic/{$params.comicId + 1}"> {/if}
-            <img class="comicElement" src="{$params.comicImageUrl}" alt="{$params.altText}" />
+            <img class="comicElement" src="/*{$params.comicImageUrl}*/http://placehold.it/550x1000&text=comic" alt="{$params.altText}" />
         {if $params.comicId != $params.latestComicId} </a> {/if}
     {elseif $params.comicSwfUrl}
     {elseif $params.comicYoutubeEmbed}
@@ -61,7 +62,7 @@
  */
 {template .descriptionWrapper}
     <h3 class="comicDescriptionTitle">
-        {$params.date} - {$params.title}
+        {$params.humanReadableDate} - {$params.title}
     </h3>
     <p class="comicDescription">
         {$params.description}

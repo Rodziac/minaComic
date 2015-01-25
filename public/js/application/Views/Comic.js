@@ -15,7 +15,7 @@ goog.require('soydata');
  */
 MICO.Views.Comic.pageContents = function(opt_data, opt_ignored) {
   opt_data = opt_data || {};
-  return '<div class="comicContentContainer"><h2 class="comicTitleContainer">' + opt_data.params.date + ' - ' + opt_data.params.title + '</h2><div class="advertisement wide top"></div><div class="comicNavigation">' + MICO.Views.Comic.comicNavigation(opt_data) + '</div><div class="advertisement long left"></div><div class="comicContainer">' + MICO.Views.Comic.comicWrapper(opt_data) + '</div><div class="advertisement long right"></div><div class="comicNavigation">' + MICO.Views.Comic.comicNavigation(opt_data) + '</div><div class="advertisement wide bottom"></div><div class="comicContentContainer">' + MICO.Views.Comic.descriptionWrapper(opt_data) + '</div></div>';
+  return '<div class="comicContentContainer"><h2 class="comicTitleContainer" title="' + opt_data.params.humanReadableDate + '">' + opt_data.params.title + '</h2><div class="advertisement wide top"><img src="http://placehold.it/350x65&text=top horizontal advertisement"></div><div class="comicNavigation">' + MICO.Views.Comic.comicNavigation(opt_data) + '</div><div class="advertisement long left"><img src="http://placehold.it/65x350&text=Advertisement: left vertical advertisement"></div><div class="comicContainer">' + MICO.Views.Comic.comicWrapper(opt_data) + '</div><div class="advertisement long right"><img src="http://placehold.it/65x350&text=Advertisement: left vertical advertisement"></div><div class="comicNavigation">' + MICO.Views.Comic.comicNavigation(opt_data) + '</div><div class="advertisement wide bottom"><img src="http://placehold.it/350x65&text=Advertisement: bottom horizontal advertisement"></div><div class="comicDescriptionContainer">' + MICO.Views.Comic.descriptionWrapper(opt_data) + '</div></div>';
 };
 
 
@@ -39,7 +39,7 @@ MICO.Views.Comic.comicNavigation = function(opt_data, opt_ignored) {
  */
 MICO.Views.Comic.comicWrapper = function(opt_data, opt_ignored) {
   opt_data = opt_data || {};
-  return (opt_data.params.comicImageUrl) ? ((opt_data.params.comicId != opt_data.params.latestComicId) ? ' <a href="/comic/' + (opt_data.params.comicId + 1) + '"> ' : '') + '<img class="comicElement" src="' + opt_data.params.comicImageUrl + '" alt="' + opt_data.params.altText + '" />' + ((opt_data.params.comicId != opt_data.params.latestComicId) ? ' </a> ' : '') : (opt_data.params.comicSwfUrl) ? '' : (opt_data.params.comicYoutubeEmbed) ? '' : '';
+  return ((opt_data.params.comicId != opt_data.params.latestComicId) ? ' <a href="/comic/' + (opt_data.params.comicId + 1) + '"> ' : '') + '<img class="comicElement" src="http://placehold.it/550x1000&text=comic" alt="' + opt_data.params.altText + '" />' + ((opt_data.params.comicId != opt_data.params.latestComicId) ? ' </a> ' : '');
 };
 
 
@@ -50,5 +50,5 @@ MICO.Views.Comic.comicWrapper = function(opt_data, opt_ignored) {
  * @notypecheck
  */
 MICO.Views.Comic.descriptionWrapper = function(opt_data, opt_ignored) {
-  return '<h3 class="comicDescriptionTitle">' + opt_data.params.date + ' - ' + opt_data.params.title + '</h3><p class="comicDescription">' + opt_data.params.description + '</p>';
+  return '<h3 class="comicDescriptionTitle">' + opt_data.params.humanReadableDate + ' - ' + opt_data.params.title + '</h3><p class="comicDescription">' + opt_data.params.description + '</p>';
 };

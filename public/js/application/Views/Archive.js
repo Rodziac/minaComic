@@ -31,7 +31,7 @@ MICO.Views.Archive.archiveList = function(opt_data, opt_ignored) {
   var comicListLen8 = comicList8.length;
   for (var comicIndex8 = 0; comicIndex8 < comicListLen8; comicIndex8++) {
     var comicData8 = comicList8[comicIndex8];
-    output += '<li><a href="/comic/' + comicData8.comicId + '">' + comicData8.title + ' - ' + comicData8.date + '</a></li>';
+    output += '<li><a href="/comic/' + comicData8.comicId + '">' + comicData8.title + ' - ' + comicData8.humanReadableDate + '</a></li>';
   }
   output += '</ul>';
   return output;

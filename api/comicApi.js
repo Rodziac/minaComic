@@ -67,7 +67,7 @@ router.get("/getComicData", function (req, res) {
 
 router.get("/getComicArchive", function (req, res) {
 
-    comicCollection.find({disabled: false}, 'title date comicId', function(err, comics) {
+    comicCollection.find({disabled: false}, 'title date comicId', {sort: {date: 1}} , function(err, comics) {
 
         res.json({comics: comics});
 

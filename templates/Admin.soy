@@ -53,7 +53,7 @@
     <span class="inputLabel">Live date: </span>
     <div class="comicStartDate"></div>
     <span class="inputLabel">Disabled: </span>
-    <span class="isDisabled goog-checkbox {if $params.disabled}goog-checkbox-checked{/if}"></span>
+    <span class="isDisabled goog-checkbox {if $params.disabled}goog-checkbox-checked{else}goog-checkbox-unchecked{/if}"></span>
     <span class="inputLabel">Embed code: </span>
     <textarea class="mediaEmbedCode">{if $params.comicEmbed}{$params.comicEmbed}{/if}</textarea>
     <span class="inputLabel">Comic Image: </span>

@@ -19,6 +19,9 @@ goog.require('goog.editor.plugins.SpacesTabHandler');
 goog.require('goog.editor.plugins.UndoRedo');
 goog.require('goog.ui.editor.DefaultToolbar');
 goog.require('goog.ui.editor.ToolbarController');
+goog.require('goog.i18n.DateTimeFormat');
+goog.require('goog.i18n.DateTimeParse');
+goog.require('goog.ui.InputDatePicker');
 
 goog.require("MICO.MVC.Controller");
 
@@ -149,8 +152,16 @@ MICO.Controllers.AdminController.prototype.renderPostEditor = function(postData)
         var descriptionEditor = new goog.ui.editor.ToolbarController(descriptionField, descriptionEditorToolbox);
     }
 
+    descriptionField.makeEditable();
+
+    var PATTERN = "MM'/'dd'/'yyyy";
+    var formatter = new goog.i18n.DateTimeFormat(PATTERN);
+    var parser = new goog.i18n.DateTimeParse(PATTERN);
+
     var liveDatePicker = new goog.ui.LabelInput('MM/DD/YYYY');
     liveDatePicker.render(goog.dom.getElementByClass('comicStartDate'));
+    var liveDatePickerAction = new goog.ui.InputDatePicker(formatter, parser);
+    liveDatePickerAction.decorate(liveDatePicker.getElement());
 
     var isDisabled = goog.ui.decorate(goog.dom.getElementByClass('isDisabled'));
 

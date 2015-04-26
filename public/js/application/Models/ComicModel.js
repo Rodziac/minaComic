@@ -32,9 +32,10 @@ goog.inherits(MICO.Models.ComicModel, MICO.MVC.Model);
  */
 MICO.Models.ComicModel.prototype.getComicData = function(callback) {
 
-    var params = {
-        "comicId": this.comicId
-    };
+    var params = {};
+    if (this.comicId) {
+        params["comicId"] = this.comicId;
+    }
 
     var that = this;
 

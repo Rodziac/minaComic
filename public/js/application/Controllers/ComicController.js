@@ -42,7 +42,7 @@ MICO.Controllers.ComicController.prototype.renderPageContent = function(comicId)
 
     var that = this;
 
-    this.model.comicId = comicId;
+    this.model.comicId = comicId || false;
     this.model.getComicData(function(response){
 
         that.model.getRandomComicId(function(randomComic){

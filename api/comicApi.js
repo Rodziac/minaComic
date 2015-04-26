@@ -35,7 +35,7 @@ router.get("/getComicData", function (req, res) {
 
         var latestComicId = count - 1;
 
-        var requestedComicId = parseInt(req.param("comicId") == 'undefined' ? latestComicId : req.param("comicId"), 10);
+        var requestedComicId = parseInt(req.query.comicId ? req.query.comicId : latestComicId, 10);
 
         comicCollection.findOne({comicId: requestedComicId, disabled: false}, null, function(err, comic){
 

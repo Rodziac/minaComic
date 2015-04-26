@@ -48,7 +48,7 @@
 {template .comicWrapper}
     /*{if $params.comicImageUrl}*/
     {if true}
-        {if $params.comicId != $params.latestComicId} <a href="/comic/{$params.comicId + 1}"> {/if}
+        {if $params.comicId != $params.latestComicId} <a href="/comic/{$params.nextId}"> {/if}
             <img class="comicElement" src="/*{$params.comicImageUrl}*/http://placehold.it/550x1000&text=comic" alt="{$params.altText}" />
         {if $params.comicId != $params.latestComicId} </a> {/if}
     {elseif $params.comicSwfUrl}

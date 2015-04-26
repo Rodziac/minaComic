@@ -44,9 +44,14 @@ MICO.Controllers.RouteController.prototype.startRouting = function () {
 
         // Disable postback on link click
         goog.events.listen(document, 'click', function (e) {
+
+            //TODO: if case repetition
             if (e.target.nodeName == "A" && e.target.href && e.target.href != "javascript:;" && !goog.dom.classlist.contains(e.target, goog.getCssName('externalLink'))) {
                 e.preventDefault();
                 that.historyObject.setToken(e.target.href.replace(window.location.origin, "").substr(1));
+            } else if (e.target.parentElement.nodeName == "A" && e.target.parentElement.href && e.target.parentElement.href != "javascript:;" && !goog.dom.classlist.contains(e.target.parentElement, goog.getCssName('externalLink'))) {
+                e.preventDefault();
+                that.historyObject.setToken(e.target.parentElement.href.replace(window.location.origin, "").substr(1));
             }
         });
 

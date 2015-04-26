@@ -39,7 +39,7 @@ MICO.Views.Comic.comicNavigation = function(opt_data, opt_ignored) {
  */
 MICO.Views.Comic.comicWrapper = function(opt_data, opt_ignored) {
   opt_data = opt_data || {};
-  return ((opt_data.params.comicId != opt_data.params.latestComicId) ? ' <a href="/comic/' + (opt_data.params.comicId + 1) + '"> ' : '') + '<img class="comicElement" src="http://placehold.it/550x1000&text=comic" alt="' + opt_data.params.altText + '" />' + ((opt_data.params.comicId != opt_data.params.latestComicId) ? ' </a> ' : '');
+  return ((opt_data.params.comicId != opt_data.params.latestComicId) ? ' <a href="/comic/' + opt_data.params.nextId + '"> ' : '') + '<img class="comicElement" src="http://placehold.it/550x1000&text=comic" alt="' + opt_data.params.altText + '" />' + ((opt_data.params.comicId != opt_data.params.latestComicId) ? ' </a> ' : '');
 };
 
 

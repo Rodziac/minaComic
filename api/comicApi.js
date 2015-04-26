@@ -82,13 +82,13 @@ router.get("/getComicArchive", function (req, res) {
 router.post("/addComic", function (req, res) {
 
     var newComic = new comicCollection({
-        comicImageUrl: req.param("comicImageUrl") || "",
-        comicEmbed: req.param("comicYoutubeEmbed") || "",
-        altText: req.param("altText") || "",
-        description: req.param("description") || "",
-        title: req.param("title") || "Untitled",
-        date: req.param("date") || new Date(),
-        disabled: req.param("disabled") || false
+        comicImageUrl: req.query.comicImageUrl || "",
+        comicEmbed: req.query.comicYoutubeEmbed || "",
+        altText: req.query.altText || "",
+        description: req.query.description || "",
+        title: req.query.title || "Untitled",
+        date: req.query.date || new Date(),
+        disabled: req.query.disabled || false
     });
 
     newComic.save(function(err){
@@ -103,7 +103,7 @@ router.post("/addComic", function (req, res) {
 
 router.put("/editComic", function (req, res) {
 
-    comicCollection.update({comicId: req.param('comicId')}, req.body, null, function(err){
+    comicCollection.update({comicId: req.query.comicId}, req.body, null, function(err){
 
         res.json({success: true});
         comicCollection.syncRandom(function (err, result) {});
@@ -114,7 +114,7 @@ router.put("/editComic", function (req, res) {
 
 router.delete("/deleteComic", function (req, res) {
 
-    comicCollection.remove({comicId: req.param('comicId')}, function(err){
+    comicCollection.remove({comicId: req.query.comicId}, function(err){
 
         res.json({success: true});
         comicCollection.syncRandom(function (err, result) {});

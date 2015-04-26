@@ -15,7 +15,7 @@ var contentCollection = mongoose.model("Content", contentSchema);
 
 router.get("/getContent", function(req, res) {
 
-    contentCollection.findOne({contentType: req.param("contentType")}, null, function(err, content){
+    contentCollection.findOne({contentType: req.query.contentType}, null, function(err, content){
 
         res.json(content);
 
@@ -25,7 +25,7 @@ router.get("/getContent", function(req, res) {
 
 router.put("/setContent", function(req, res) {
 
-    contentCollection.update({contentType: req.param('contentType')}, req.body, {upsert: true}, function(err){
+    contentCollection.update({contentType: req.query.contentType}, req.body, {upsert: true}, function(err){
 
         res.json({success: true});
 

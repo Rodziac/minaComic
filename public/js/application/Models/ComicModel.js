@@ -51,7 +51,11 @@ MICO.Models.ComicModel.prototype.getComicData = function(callback) {
 
 MICO.Models.ComicModel.prototype.getRandomComicId = function(callback) {
 
-    this.get('/api/comic/getRandomComic', {}, function(response) {
+    var params = {
+        "comicId": this.comicId
+    };
+
+    this.get('/api/comic/getRandomComic', params, function(response) {
 
         callback.call(this, response);
 

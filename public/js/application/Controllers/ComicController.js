@@ -45,6 +45,8 @@ MICO.Controllers.ComicController.prototype.renderPageContent = function(comicId)
     this.model.comicId = comicId || false;
     this.model.getComicData(function(response){
 
+        that.model.comicId = response["latestComicId"];
+
         that.model.getRandomComicId(function(randomComic){
 
             response["randomComicId"] = randomComic["comicId"];

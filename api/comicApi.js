@@ -125,7 +125,7 @@ router.delete("/deleteComic", function (req, res) {
 
 router.get("/getRandomComic", function(req, res) {
 
-    var filter = { disabled: false };
+    var filter = {$nor: [{disabled: true}, {comicId: req.query.comicId}]};
     var fields = { comicId: 1 };
     var options = { limit: 1 };
     comicCollection.findRandom(filter, fields, options, function (err, comic) {

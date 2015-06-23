@@ -21,4 +21,4 @@ MICO.Bootstrapper = function() {
         project.init();
 
 };
-goog.exportSymbol("MICO.Bootstrapper", MICO.Bootstrapper);
+goog.exportSymbol('MICO.Bootstrapper', MICO.Bootstrapper);

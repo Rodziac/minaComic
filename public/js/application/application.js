@@ -4,7 +4,7 @@ goog.provide('MICO.Application');
 goog.require('MICO.Controllers.RouteController');
 goog.require('MICO.LayoutHelper');
 
-goog.require("MICO.Views.Layout");
+goog.require('MICO.Views.Layout');
 
 // Required goog resources
 goog.require('goog.array');
@@ -31,7 +31,7 @@ goog.inherits(MICO.Application, MICO.MVC.Controller);
 MICO.Application.prototype.init = function() {
 
     //Render layout to be filled
-    this.render(this.siteLayout, {}, goog.dom.getElement("mainWrapper"));
+    this.render(this.siteLayout, {}, goog.dom.getElement('mainWrapper'));
 
     // Start routing, and the application will run with it.
     var router = new MICO.Controllers.RouteController();

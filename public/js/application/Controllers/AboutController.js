@@ -1,11 +1,9 @@
-goog.provide("MICO.Controllers.AboutController");
+goog.provide('MICO.Controllers.AboutController');
 
-goog.require("MICO.MVC.Controller");
-
-goog.require("MICO.Models.ContentModel");
-
-goog.require("MICO.Views.Layout");
-goog.require("MICO.Views.About");
+goog.require('MICO.MVC.Controller');
+goog.require('MICO.Models.ContentModel');
+goog.require('MICO.Views.About');
+goog.require('MICO.Views.Layout');
 
 /**
  * Controller that handles about page.
@@ -42,10 +40,10 @@ MICO.Controllers.AboutController.prototype.renderPageContent = function() {
 
     var that = this;
 
-    this.model.contentType = "about";
-    this.model.getContent(function(response){
+    this.model.contentType = 'about';
+    this.model.getContent(function(response) {
 
-        that.render(that.pageContents, response, goog.dom.getElement("content"));
+        that.render(that.pageContents, response, goog.dom.getElement('content'));
 
     });
 

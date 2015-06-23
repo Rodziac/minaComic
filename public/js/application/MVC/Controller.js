@@ -28,7 +28,7 @@ MICO.MVC.Controller.prototype.render = function(template, params, domWrapper) {
      * domWrapper or siteContainer DOM.
      */
     var container = domWrapper;
-    container.innerHTML = "";
+    container.innerHTML = '';
 
 
     /**
@@ -44,8 +44,8 @@ MICO.MVC.Controller.prototype.render = function(template, params, domWrapper) {
  * @param {Object} params Parameters to be passed to template.
  * @return {!Node} Returns HTML Node Type.
  */
-MICO.MVC.Controller.prototype.buildDOM = function (template, params) {
-    return goog.dom.htmlToDocumentFragment(this.getHtmlWithParams(template,params));
+MICO.MVC.Controller.prototype.buildDOM = function(template, params) {
+    return goog.dom.htmlToDocumentFragment(this.getHtmlWithParams(template, params));
 };
 
 /**
@@ -54,12 +54,13 @@ MICO.MVC.Controller.prototype.buildDOM = function (template, params) {
  * @param {Object} params Parameters to be passed to template.
  * @return {!string} Returns HTML Node Type.
  */
-MICO.MVC.Controller.prototype.getHtmlWithParams = function (template, params) {
+MICO.MVC.Controller.prototype.getHtmlWithParams = function(template, params) {
 
-    var markup = "";
+    var markup = '';
 
     if (params) {
-        var context = { params:params }; // Google SOY Templates needs for a wrapper for given parameters.
+        // Google SOY Templates needs for a wrapper for given parameters.
+        var context = { params: params };
         markup = template(context);
     }
 

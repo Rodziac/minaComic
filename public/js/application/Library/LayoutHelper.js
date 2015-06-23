@@ -3,6 +3,9 @@ goog.provide('MICO.LayoutHelper');
 //todo: //
 MICO.LayoutHelper.setContentHeight = function() {
 
-    goog.dom.getElement("content").style.minHeight = (window.innerHeight - 200 - goog.dom.getElement("footer").offsetHeight) + "px";
+    var footerHeight = goog.dom.getElement('footer').offsetHeight;
+    var calculatedContentHeight = window.innerHeight - 200 - footerHeight;
+
+    goog.dom.getElement('content').style.minHeight = calculatedContentHeight + 'px';
 
 };

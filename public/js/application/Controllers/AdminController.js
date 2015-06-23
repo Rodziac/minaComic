@@ -1,23 +1,19 @@
-goog.provide("MICO.Controllers.AdminController");
+goog.provide('MICO.Controllers.AdminController');
 
-goog.require("goog.ui.TabBar");
-goog.require("goog.ui.LabelInput");
-goog.require("goog.ui.decorate");
-goog.require('goog.ui.ComboBox');
-goog.require('goog.ui.Checkbox');
+goog.require('MICO.MVC.Controller');
+goog.require('MICO.Models.ComicModel');
+goog.require('MICO.Models.ContentModel');
+goog.require('MICO.Utils');
+goog.require('MICO.Views.Admin');
+goog.require('MICO.Views.Layout');
 goog.require('goog.i18n.DateTimeFormat');
 goog.require('goog.i18n.DateTimeParse');
+goog.require('goog.ui.Checkbox');
+goog.require('goog.ui.ComboBox');
 goog.require('goog.ui.InputDatePicker');
-
-goog.require("MICO.MVC.Controller");
-
-goog.require("MICO.Models.ComicModel");
-goog.require("MICO.Models.ContentModel");
-
-goog.require("MICO.Views.Layout");
-goog.require("MICO.Views.Admin");
-
-goog.require("MICO.Utils");
+goog.require('goog.ui.LabelInput');
+goog.require('goog.ui.TabBar');
+goog.require('goog.ui.decorate');
 
 /**
  * Class that handles routing and navigation.
@@ -54,16 +50,16 @@ MICO.Controllers.AdminController.prototype.renderPageContent = function() {
 
     var that = this;
 
-    this.render(this.pageContents, {}, goog.dom.getElement("content"));
+    this.render(this.pageContents, {}, goog.dom.getElement('content'));
 
     var tabBar = new goog.ui.TabBar();
-    tabBar.decorate(goog.dom.getElement("tabs"));
+    tabBar.decorate(goog.dom.getElement('tabs'));
 
     that.renderPostEditor();
 
-    goog.events.listen(tabBar, goog.ui.Component.EventType.SELECT,function(e) {
+    goog.events.listen(tabBar, goog.ui.Component.EventType.SELECT, function(e) {
 
-        switch(this.getSelectedTabIndex()) {
+        switch (this.getSelectedTabIndex()) {
             case 0:
                 that.renderPostEditor();
                 break;
@@ -88,9 +84,12 @@ MICO.Controllers.AdminController.prototype.renderPostEditor = function(postData)
 
     var that = this;
 
-    this.render(this.postEditor, postData || {}, goog.dom.getElement("tabContent"));
+    this.render(this.postEditor, postData || {}, goog.dom.getElement('tabContent'));
 
-    var descriptionEditor = MICO.Utils.renderTextEditor("descriptionText", "descriptionEditorToolbox");
+    var descriptionEditor = MICO.Utils.renderTextEditor(
+                                'descriptionText',
+                                'descriptionEditorToolbox'
+                            );
 
     var PATTERN = "MM'/'dd'/'yyyy";
     var formatter = new goog.i18n.DateTimeFormat(PATTERN);
@@ -103,34 +102,34 @@ MICO.Controllers.AdminController.prototype.renderPostEditor = function(postData)
 
     var isDisabled = goog.ui.decorate(goog.dom.getElementByClass('isDisabled'));
 
-    var submitBtn = goog.dom.getElementByClass("submitBtn");
-    goog.events.listen(submitBtn, goog.events.EventType.CLICK, function(e){
+    var submitBtn = goog.dom.getElementByClass('submitBtn');
+    goog.events.listen(submitBtn, goog.events.EventType.CLICK, function(e) {
 
         var comicData = {
-            "comicId": goog.dom.getElementByClass("comicId").value,
-            "title": goog.dom.getElementByClass("title").value,
-            "description": descriptionEditor.getFieldCopy().innerHTML,
-            "altText": goog.dom.getElementByClass("altText").value,
-            "disabled": isDisabled.isSelected(),
-            "embed": goog.dom.getElementByClass("mediaEmbedCode").value,
-            "imageFile": goog.dom.getElementByClass("comicImage").value
+            'comicId': goog.dom.getElementByClass('comicId').value,
+            'title': goog.dom.getElementByClass('title').value,
+            'description': descriptionEditor.getFieldCopy().innerHTML,
+            'altText': goog.dom.getElementByClass('altText').value,
+            'disabled': isDisabled.isSelected(),
+            'embed': goog.dom.getElementByClass('mediaEmbedCode').value,
+            'imageFile': goog.dom.getElementByClass('comicImage').value
         };
 
         that.comicModel.comicData = comicData;
 
-        if(comicData.comicId > -1) {
+        if (comicData.comicId > -1) {
 
-            that.comicModel.editComic(function(response){
+            that.comicModel.editComic(function(response) {
 
-                alert("DONE!");
+                alert('DONE!');
 
             });
 
         } else {
 
-            that.comicModel.addComic(function(response){
+            that.comicModel.addComic(function(response) {
 
-                alert("DONE!")
+                alert('DONE!');
 
             });
 
@@ -150,16 +149,17 @@ MICO.Controllers.AdminController.prototype.renderPostList = function() {
 
     this.comicModel.getFullArchive(function(response) {
 
-        that.render(that.postList, response, goog.dom.getElement("tabContent"));
+        that.render(that.postList, response, goog.dom.getElement('tabContent'));
 
-        var submitBtn = goog.dom.getElementByClass("submitBtn");
-        var deleteBtn = goog.dom.getElementByClass("deleteBtn");
+        var submitBtn = goog.dom.getElementByClass('submitBtn');
+        var deleteBtn = goog.dom.getElementByClass('deleteBtn');
 
         goog.events.listen(submitBtn, goog.events.EventType.CLICK, function(e) {
 
-            that.comicModel.comicId = goog.dom.getElementByClass("comicsList").selectedOptions[0].value;
+            that.comicModel.comicId = goog.dom.getElementByClass('comicsList')
+                                        .selectedOptions[0].value;
 
-            that.comicModel.getComicData(function(response){
+            that.comicModel.getComicData(function(response) {
 
                 that.renderPostEditor(response);
 
@@ -169,11 +169,12 @@ MICO.Controllers.AdminController.prototype.renderPostList = function() {
 
         goog.events.listen(deleteBtn, goog.events.EventType.CLICK, function(e) {
 
-            that.comicModel.comicId = goog.dom.getElementByClass("comicsList").selectedOptions[0].value;
+            that.comicModel.comicId = goog.dom.getElementByClass('comicsList')
+                                        .selectedOptions[0].value;
 
-            that.comicModel.deleteComic(function(response){
+            that.comicModel.deleteComic(function(response) {
 
-                alert("DONE!")
+                alert('DONE!');
 
             });
 
@@ -191,16 +192,16 @@ MICO.Controllers.AdminController.prototype.renderContentEditor = function() {
 
     var that = this;
 
-    this.render(this.contentEditor, {}, goog.dom.getElement("tabContent"));
+    this.render(this.contentEditor, {}, goog.dom.getElement('tabContent'));
 
     var comboElement = goog.dom.getElement('contentType');
     var comboBox = new goog.ui.ComboBox();
     comboBox.setUseDropdownArrow(true);
     comboBox.setDefaultText('Select a content type...');
 
-    this.contentModel.getContentTypes(function(contentTypes){
+    this.contentModel.getContentTypes(function(contentTypes) {
 
-        goog.array.forEach(contentTypes, function(contentType){
+        goog.array.forEach(contentTypes, function(contentType) {
 
             comboBox.addItem(new goog.ui.ComboBoxItem(contentType));
 
@@ -218,7 +219,7 @@ MICO.Controllers.AdminController.prototype.renderContentEditor = function() {
 
         that.contentModel.contentType = e.target.getValue();
 
-        that.contentModel.getContent(function(response){
+        that.contentModel.getContent(function(response) {
 
             //Set content of editor to content in response
 
@@ -227,21 +228,21 @@ MICO.Controllers.AdminController.prototype.renderContentEditor = function() {
     });
 
 
-    var descriptionEditor = MICO.Utils.renderTextEditor("contentText", "contentToolbar");
+    var descriptionEditor = MICO.Utils.renderTextEditor('contentText', 'contentToolbar');
 
-    var submitBtn = goog.dom.getElementByClass("submitBtn");
+    var submitBtn = goog.dom.getElementByClass('submitBtn');
     goog.events.listen(submitBtn, goog.events.EventType.CLICK, function(e) {
 
         that.contentModel.contentData = {
-            "contentType": comboBox.getValue(),
-            "contentDescription": "",
-            "title": "",
-            "content": descriptionEditor.getFieldCopy().innerHTML
+            'contentType': comboBox.getValue(),
+            'contentDescription': '',
+            'title': '',
+            'content': descriptionEditor.getFieldCopy().innerHTML
         };
 
-        that.contentModel.setContent(function(response){
+        that.contentModel.setContent(function(response) {
 
-            alert("Done!");
+            alert('Done!');
 
         });
 

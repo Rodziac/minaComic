@@ -1,17 +1,13 @@
-goog.provide("MICO.Controllers.RouteController");
+goog.provide('MICO.Controllers.RouteController');
 
-goog.require("MICO.MVC.Controller");
-
-// Page resources
-goog.require("MICO.Controllers.ComicController");
-goog.require("MICO.Controllers.ArchiveController");
-goog.require("MICO.Controllers.AboutController");
-goog.require("MICO.Controllers.AdminController");
-
-// Required goog resources
-goog.require("goog.history.Html5History");
-goog.require("goog.string");
+goog.require('MICO.Controllers.AboutController');
+goog.require('MICO.Controllers.AdminController');
+goog.require('MICO.Controllers.ArchiveController');
+goog.require('MICO.Controllers.ComicController');
+goog.require('MICO.MVC.Controller');
 goog.require('goog.dom.classlist');
+goog.require('goog.history.Html5History');
+goog.require('goog.string');
 
 /**
  * Controller that handles routing and navigation.
@@ -34,7 +30,7 @@ goog.inherits(MICO.Controllers.RouteController, MICO.MVC.Controller);
 /**
  * Listen to link clicks and navigation
  */
-MICO.Controllers.RouteController.prototype.startRouting = function () {
+MICO.Controllers.RouteController.prototype.startRouting = function() {
 
     var that = this;
 
@@ -43,20 +39,40 @@ MICO.Controllers.RouteController.prototype.startRouting = function () {
     if (this.historyObject) {
 
         // Disable postback on link click
-        goog.events.listen(document, 'click', function (e) {
+        goog.events.listen(document, 'click', function(e) {
 
             //TODO: if case repetition
-            if (e.target.nodeName == "A" && e.target.href && e.target.href != "javascript:;" && !goog.dom.classlist.contains(e.target, goog.getCssName('externalLink'))) {
+            if (e.target.nodeName == 'A' &&
+                e.target.href &&
+                e.target.href != 'javascript:;' &&
+                !goog.dom.classlist.contains(e.target, goog.getCssName('externalLink'))) {
+
                 e.preventDefault();
-                that.historyObject.setToken(e.target.href.replace(window.location.origin, "").substr(1));
-            } else if (e.target.parentElement.nodeName == "A" && e.target.parentElement.href && e.target.parentElement.href != "javascript:;" && !goog.dom.classlist.contains(e.target.parentElement, goog.getCssName('externalLink'))) {
+
+                var urlPath = e.target.href;
+                urlPath = urlPath.replace(window.location.origin, '').substr(1);
+
+                that.historyObject.setToken(urlPath);
+
+            } else if (e.target.parentElement.nodeName == 'A' &&
+                       e.target.parentElement.href &&
+                       e.target.parentElement.href != 'javascript:;' &&
+                       !goog.dom.classlist.contains(
+                            e.target.parentElement, goog.getCssName('externalLink'))
+                       ) {
+
                 e.preventDefault();
-                that.historyObject.setToken(e.target.parentElement.href.replace(window.location.origin, "").substr(1));
+
+                var urlPath = e.target.parentElement.href;
+                urlPath = urlPath.replace(window.location.origin, '').substr(1);
+
+                that.historyObject.setToken(urlPath);
+
             }
         });
 
         // Listen history navigation events and nav
-        goog.events.listen(this.historyObject, goog.history.EventType.NAVIGATE, function (e) {
+        goog.events.listen(this.historyObject, goog.history.EventType.NAVIGATE, function(e) {
 
             e.preventDefault();
             that.historyObject.setToken(e.token);
@@ -164,7 +180,7 @@ MICO.Controllers.RouteController.prototype.setRoutes_ = function() {
  * }
  * @private
  */
-MICO.Controllers.RouteController.prototype.add_ = function (route) {
+MICO.Controllers.RouteController.prototype.add_ = function(route) {
 
     this.routesMap.push(route);
 
@@ -175,7 +191,7 @@ MICO.Controllers.RouteController.prototype.add_ = function (route) {
  * @param {string} pageToken current url token.
  * @private
  */
-MICO.Controllers.RouteController.prototype.findNavigation_ = function (pageToken) {
+MICO.Controllers.RouteController.prototype.findNavigation_ = function(pageToken) {
 
     var that = this;
 
@@ -183,23 +199,23 @@ MICO.Controllers.RouteController.prototype.findNavigation_ = function (pageToken
 
     var routeFound = false;
     // find current route object.
-    goog.array.forEach(this.routesMap, function (route) {
+    goog.array.forEach(this.routesMap, function(route) {
 
         // Do not continue if already found a route
-        if(!routeFound) {
+        if (!routeFound) {
 
             //Split url parameters from template and match the base
             var routeSections = route.format.split('/');
             var tokenRootSections = tokenRoot.split('/');
             var onTrack = true;
 
-            goog.array.forEach(routeSections, function (pathSection, index) {
+            goog.array.forEach(routeSections, function(pathSection, index) {
 
                 // Do not continue if current match combo is broken
                 if (onTrack) {
 
                     // Ignore if current section is a parameter
-                    if (pathSection.substr(0, 1) != ":") {
+                    if (pathSection.substr(0, 1) != ':') {
 
                         // Skip this route if combo is broken
                         if (pathSection != tokenRootSections[index]) {
@@ -241,17 +257,17 @@ MICO.Controllers.RouteController.prototype.findNavigation_ = function (pageToken
  * @param {string} pageToken The token of the url
  * @private
  */
-MICO.Controllers.RouteController.prototype.navigateToPage_ = function (currentRoute, pageToken) {
+MICO.Controllers.RouteController.prototype.navigateToPage_ = function(currentRoute, pageToken) {
 
     // Map page parameters to params object
     var params = {};
 
-    var routeSections = currentRoute.format.split("/");
-    var tokenSections = pageToken.split("/");
+    var routeSections = currentRoute.format.split('/');
+    var tokenSections = pageToken.split('/');
 
     goog.array.forEach(routeSections, function(routeSection, index) {
 
-        if(routeSection.substr(0, 1) == ":") {
+        if (routeSection.substr(0, 1) == ':') {
 
             params[routeSection.substr(1)] = tokenSections[index];
 

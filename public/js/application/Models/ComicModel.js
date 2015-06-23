@@ -1,6 +1,6 @@
-goog.provide("MICO.Models.ComicModel");
+goog.provide('MICO.Models.ComicModel');
 
-goog.require("MICO.MVC.Model");
+goog.require('MICO.MVC.Model');
 
 /**
  * Index model to fetch comics
@@ -34,7 +34,7 @@ MICO.Models.ComicModel.prototype.getComicData = function(callback) {
 
     var params = {};
     if (this.comicId) {
-        params["comicId"] = this.comicId;
+        params['comicId'] = this.comicId;
     }
 
     var that = this;
@@ -52,7 +52,7 @@ MICO.Models.ComicModel.prototype.getComicData = function(callback) {
 MICO.Models.ComicModel.prototype.getRandomComicId = function(callback) {
 
     var params = {
-        "comicId": this.comicId
+        'comicId': this.comicId
     };
 
     this.get('/api/comic/getRandomComic', params, function(response) {
@@ -129,7 +129,7 @@ MICO.Models.ComicModel.prototype.editComic = function(callback) {
 MICO.Models.ComicModel.prototype.deleteComic = function(callback) {
 
     var params = {
-        "comicId": this.comicId
+        'comicId': this.comicId
     };
 
     this.del('/api/comic/deleteComic', params, function(response) {
@@ -147,8 +147,8 @@ MICO.Models.ComicModel.prototype.deleteComic = function(callback) {
  */
 MICO.Models.ComicModel.prototype.comicDataParser = function(data) {
 
-    var dateObject = new Date(data["date"]);
-    data["humanReadableDate"] = dateObject.getDate() + "/" + dateObject.getMonth() + "/" + dateObject.getFullYear();
+    var dateObject = new Date(data['date']);
+    data['humanReadableDate'] = dateObject.getDate() + '/' + dateObject.getMonth() + '/' + dateObject.getFullYear();
     return data;
 
 };
@@ -162,9 +162,9 @@ MICO.Models.ComicModel.prototype.archiveDataParser = function(data) {
 
     var that = this;
 
-    goog.array.forEach(data["comics"], function(item, index){
+    goog.array.forEach(data['comics'], function(item, index) {
 
-        data["comics"][index] = that.comicDataParser(item);
+        data['comics'][index] = that.comicDataParser(item);
 
     });
 

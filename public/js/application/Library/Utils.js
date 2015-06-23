@@ -12,9 +12,9 @@ goog.require('goog.editor.plugins.LoremIpsum');
 goog.require('goog.editor.plugins.RemoveFormatting');
 goog.require('goog.editor.plugins.SpacesTabHandler');
 goog.require('goog.editor.plugins.UndoRedo');
+goog.require('goog.ui.decorate');
 goog.require('goog.ui.editor.DefaultToolbar');
 goog.require('goog.ui.editor.ToolbarController');
-goog.require("goog.ui.decorate");
 
 //todo: //
 MICO.Utils.renderTextEditor = function(textFieldId, toolbarFieldId) {
@@ -63,11 +63,15 @@ MICO.Utils.renderTextEditor = function(textFieldId, toolbarFieldId) {
     var descriptionEditor = null;
 
     var toolboxElement = goog.dom.getElement(toolbarFieldId);
-    if(toolboxElement) {
-        var descriptionEditorToolbox = goog.ui.editor.DefaultToolbar.makeToolbar(buttons, toolboxElement);
+    if (toolboxElement) {
+        var descriptionEditorToolbox = goog.ui.editor.DefaultToolbar.makeToolbar(
+                                        buttons,
+                                        toolboxElement);
 
         // Hook the toolbar into the field.
-        descriptionEditor = new goog.ui.editor.ToolbarController(descriptionField, descriptionEditorToolbox);
+        descriptionEditor = new goog.ui.editor.ToolbarController(
+                                    descriptionField,
+                                    descriptionEditorToolbox);
     }
 
     descriptionField.makeEditable();

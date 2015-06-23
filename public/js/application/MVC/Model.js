@@ -1,10 +1,10 @@
 goog.provide('MICO.MVC.Model');
 
-goog.require('goog.structs.Map');
-goog.require('goog.net.XhrManager');
 goog.require('goog.Uri.QueryData');
-goog.require('goog.string');
 goog.require('goog.json.Serializer');
+goog.require('goog.net.XhrManager');
+goog.require('goog.string');
+goog.require('goog.structs.Map');
 
 /**
  * Generic model
@@ -22,11 +22,18 @@ MICO.MVC.Model = function() {
  */
 MICO.MVC.Model.prototype.get = function(url, reqBody, callback) {
 
-    if(reqBody && reqBody != {})
-        url += "?" + goog.Uri.QueryData.createFromMap(reqBody).toString();
+    if (reqBody && reqBody != {})
+        url += '?' + goog.Uri.QueryData.createFromMap(reqBody).toString();
 
-    this.closureXhr.send(goog.string.getRandomString(), url, 'GET', reqBody, undefined, undefined, function(response){
-        callback.call(this, response.target.getResponseJson());
+    this.closureXhr.send(
+        goog.string.getRandomString(),
+        url,
+        'GET',
+        reqBody,
+        undefined,
+        undefined,
+        function(response) {
+            callback.call(this, response.target.getResponseJson());
     });
 
 };
@@ -36,8 +43,15 @@ MICO.MVC.Model.prototype.get = function(url, reqBody, callback) {
  */
 MICO.MVC.Model.prototype.post = function(url, reqBody, callback) {
 
-    this.closureXhr.send(goog.string.getRandomString(), url, 'POST', goog.json.serialize(reqBody), this.xhrHeader, undefined, function(response){
-        callback.call(this, response.target.getResponseJson());
+    this.closureXhr.send(
+        goog.string.getRandomString(),
+        url,
+        'POST',
+        goog.json.serialize(reqBody),
+        this.xhrHeader,
+        undefined,
+        function(response) {
+            callback.call(this, response.target.getResponseJson());
     });
 
 };
@@ -47,8 +61,15 @@ MICO.MVC.Model.prototype.post = function(url, reqBody, callback) {
  */
 MICO.MVC.Model.prototype.put = function(url, reqBody, callback) {
 
-    this.closureXhr.send(goog.string.getRandomString(), url, 'PUT', goog.json.serialize(reqBody), this.xhrHeader, undefined, function(response){
-        callback.call(this, response.target.getResponseJson());
+    this.closureXhr.send(
+        goog.string.getRandomString(),
+        url,
+        'PUT',
+        goog.json.serialize(reqBody),
+        this.xhrHeader,
+        undefined,
+        function(response) {
+            callback.call(this, response.target.getResponseJson());
     });
 
 };
@@ -58,8 +79,15 @@ MICO.MVC.Model.prototype.put = function(url, reqBody, callback) {
  */
 MICO.MVC.Model.prototype.del = function(url, reqBody, callback) {
 
-    this.closureXhr.send(goog.string.getRandomString(), url, 'DELETE', goog.json.serialize(reqBody), this.xhrHeader, undefined, function(response){
-        callback.call(this, response.target.getResponseJson());
+    this.closureXhr.send(
+        goog.string.getRandomString(),
+        url,
+        'DELETE',
+        goog.json.serialize(reqBody),
+        this.xhrHeader,
+        undefined,
+        function(response) {
+            callback.call(this, response.target.getResponseJson());
     });
 
 };

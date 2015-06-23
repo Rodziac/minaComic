@@ -1,11 +1,9 @@
-goog.provide("MICO.Controllers.ArchiveController");
+goog.provide('MICO.Controllers.ArchiveController');
 
-goog.require("MICO.MVC.Controller");
-
-goog.require("MICO.Models.ComicModel");
-
-goog.require("MICO.Views.Layout");
-goog.require("MICO.Views.Archive");
+goog.require('MICO.MVC.Controller');
+goog.require('MICO.Models.ComicModel');
+goog.require('MICO.Views.Archive');
+goog.require('MICO.Views.Layout');
 
 /**
  * Controller handling archive page
@@ -42,7 +40,7 @@ MICO.Controllers.ArchiveController.prototype.renderPageContent = function() {
 
     var that = this;
 
-    this.model.getFullArchive(function(response){
+    this.model.getFullArchive(function(response) {
 
         that.render(that.pageContents, response, goog.dom.getElement('content'));
 

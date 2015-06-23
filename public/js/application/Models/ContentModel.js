@@ -28,7 +28,7 @@ goog.inherits(MICO.Models.ContentModel, MICO.MVC.Model);
 MICO.Models.ContentModel.prototype.getContent = function(callback) {
 
     var param = {
-        "contentType": this.contentType
+        'contentType': this.contentType
     };
 
     this.get('/api/content/getContent', param, function(response) {

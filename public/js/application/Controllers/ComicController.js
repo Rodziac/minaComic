@@ -1,11 +1,9 @@
-goog.provide("MICO.Controllers.ComicController");
+goog.provide('MICO.Controllers.ComicController');
 
-goog.require("MICO.MVC.Controller");
-
-goog.require("MICO.Models.ComicModel");
-
-goog.require("MICO.Views.Layout");
-goog.require("MICO.Views.Comic");
+goog.require('MICO.MVC.Controller');
+goog.require('MICO.Models.ComicModel');
+goog.require('MICO.Views.Comic');
+goog.require('MICO.Views.Layout');
 
 /**
  * Index page controller
@@ -43,14 +41,14 @@ MICO.Controllers.ComicController.prototype.renderPageContent = function(comicId)
     var that = this;
 
     this.model.comicId = comicId || false;
-    this.model.getComicData(function(response){
+    this.model.getComicData(function(response) {
 
-        that.model.comicId = response["latestComicId"];
+        that.model.comicId = response['latestComicId'];
 
-        that.model.getRandomComicId(function(randomComic){
+        that.model.getRandomComicId(function(randomComic) {
 
-            response["randomComicId"] = randomComic["comicId"];
-            that.render(that.pageContents, response, goog.dom.getElement("content"));
+            response['randomComicId'] = randomComic['comicId'];
+            that.render(that.pageContents, response, goog.dom.getElement('content'));
 
         });
 

@@ -14,7 +14,7 @@ import os
 def _GetOptionsParser():
 
     parser = argparse.ArgumentParser(prog='MICO_BUILD', add_help=True,description='MICO Project Building Progress')
-  
+
     parser.add_argument('--all',
                     action='store_true',
                     help=('Tum surecleri uygular'),
@@ -46,10 +46,10 @@ def _GetOptionsParser():
                     dest='LOCAL_DEPLOY',
                     help='local production klasorune image ve config dosyalarini yukler.')
     return parser
-  
+
 
 def main():
-  
+
     args = _GetOptionsParser().parse_args()
 
     if args.ALL:
@@ -57,13 +57,13 @@ def main():
         cssCompile()
         depswriter()
         projectBuild()
-        
+
     if args.DEPS:
         depswriter()
-        
+
     if args.TEMPLATE:
         templateToSoy()
-        
+
     if args.CSS:
         cssCompile()
 
@@ -73,5 +73,5 @@ def main():
 
     if args.LOCAL_DEPLOY:
         localDeploy()
-        
+
 main()

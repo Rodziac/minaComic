@@ -41,25 +41,41 @@
 {template .postEditor}
 <div id="postForm">
     <input type="text" class="comicId" disabled=disabled hidden=hidden value="{if $params.comicId}{$params.comicId}{else}-1{/if}"></input>
-    <span class="inputLabel">Title: </span>
-    <input type="text" class="title" value="{if $params.title}{$params.title}{/if}"></input>
-    <span class="inputLabel">Description: </span>
-    <div class="descriptionContainer">
-      <div id='descriptionEditorToolbox'></div>
-      <div id='descriptionText'>{if $params.description}{$params.description}{/if}</div>
+    <div class="inputContainer title">
+        <span class="inputLabel">Title: </span>
+        <input type="text" class="title" value="{if $params.title}{$params.title}{/if}"></input>
     </div>
-    <span class="inputLabel">Alt text: </span>
-    <input type="text" class="altText" value="{if $params.altText}{$params.altText}{/if}"></input>
-    <span class="inputLabel">Live date: </span>
-    <div class="comicStartDate"></div>
-    <span class="inputLabel">Disabled: </span>
-    <span class="isDisabled goog-checkbox {if $params.disabled}goog-checkbox-checked{else}goog-checkbox-unchecked{/if}"></span>
-    <span class="inputLabel">Embed code: </span>
-    <textarea class="mediaEmbedCode">{if $params.comicEmbed}{$params.comicEmbed}{/if}</textarea>
-    <span class="inputLabel">Comic Image: </span>
-    <input type="file" accept="image{literal}/*{/literal}" class="comicImage"></input>
-    <span class="submitBtn button">Submit</span>
-    <span class="resetBtn button">Reset</span>
+    <div class="inputContainer description">
+        <span class="inputLabel">Description: </span>
+        <div class="descriptionContainer">
+          <div id='descriptionEditorToolbox'></div>
+          <div id='descriptionText'>{if $params.description}{$params.description}{/if}</div>
+        </div>
+    </div>
+    <div class="inputContainer altText">
+        <span class="inputLabel">Alt text: </span>
+        <input type="text" class="altText" value="{if $params.altText}{$params.altText}{/if}"></input>
+    </div>
+    <div class="inputContainer datePicker">
+        <span class="inputLabel">Live date: </span>
+        <div class="comicStartDate"></div>
+    </div>
+    <div class="inputContainer disabled">
+        <span class="inputLabel">Disabled: </span>
+        <span class="isDisabled goog-checkbox {if $params.disabled}goog-checkbox-checked{else}goog-checkbox-unchecked{/if}"></span>
+    </div>
+    <div class="inputContainer embed">
+        <span class="inputLabel">Embed code: </span>
+        <textarea class="mediaEmbedCode">{if $params.comicEmbed}{$params.comicEmbed}{/if}</textarea>
+    </div>
+    <div class="inputContainer image">
+        <span class="inputLabel">Comic Image: </span>
+        <input type="file" accept="image{literal}/*{/literal}" class="comicImage"></input>
+    </div>
+    <div class="buttonsContainer">
+        <span class="submitBtn button">Submit</span>
+        <span class="resetBtn button">Reset</span>
+    </div>
 </div>
 {/template}
 

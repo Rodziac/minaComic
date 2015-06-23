@@ -19,3 +19,6 @@
 @import url('Library/inputdatepicker.css');
 @import url('Library/checkbox.css');
 
+.adminControlPanel #tabContent { margin: 20px auto 0; width: 75%; }
+
+

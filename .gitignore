@@ -13,7 +13,7 @@ __pycache__/
 public/js/deps.js
 public/production/css/*
 public/production/js/*
-public/js/Views/*
+public/js/application/Views/*
 tools/mappings/renaming_map.js
 
 

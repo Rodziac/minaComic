@@ -10,7 +10,7 @@ __pycache__/
 
 *~
 
-public/js/deps.js
+public/js/application/deps.js
 public/production/css/*
 public/production/js/*
 public/js/application/Views/*

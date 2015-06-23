@@ -10,9 +10,11 @@ __pycache__/
 
 *~
 
+public/js/deps.js
 public/production/css/*
 public/production/js/*
 public/js/Views/*
 tools/mappings/renaming_map.js
+
 
 !.keepMe

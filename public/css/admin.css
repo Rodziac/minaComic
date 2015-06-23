@@ -20,5 +20,6 @@
 @import url('Library/checkbox.css');
 
 .adminControlPanel #tabContent { margin: 20px auto 0; width: 75%; }
-
+.adminControlPanel #postForm .inputContainer.description { max-width: 697px; }
+.adminControlPanel #postForm .inputContainer.description #descriptionText { width: 100%; }
 

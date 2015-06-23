@@ -370,12 +370,40 @@ function testTickZero() {
 function testReset() {
   var clock = new goog.testing.MockClock(true);
 
-  setTimeout(function() {
+  var id = setTimeout(function() {
     fail('Timeouts should be cleared after a reset');
   }, 0);
 
   clock.reset();
   clock.tick(999999);
+
+  var calls = 0;
+  setTimeout(function() { calls++; }, 10);
+  clearTimeout(id);
+  clock.tick(100);
+  assertEquals('New timeout should still run after clearing from before reset',
+      1, calls);
+
+  clock.uninstall();
+}
+
+
+function testNewClockWithOldTimeoutId() {
+  var clock = new goog.testing.MockClock(true);
+
+  var id = setTimeout(function() {
+    fail('Timeouts should be cleared after uninstall');
+  }, 0);
+
+  clock.uninstall();
+  clock = new goog.testing.MockClock(true);
+
+  var calls = 0;
+  setTimeout(function() { calls++; }, 10);
+  clearTimeout(id);
+  clock.tick(100);
+  assertEquals('Timeout should still run after cancelling from old clock',
+      1, calls);
   clock.uninstall();
 }
 
@@ -419,6 +447,7 @@ function testQueueInsertionHelper() {
   assertTrue('Duplicate item comes at a smaller index', queue[2].dup);
 }
 
+
 function testIsTimeoutSet() {
   var clock = new goog.testing.MockClock(true);
   var timeoutKey = setTimeout(function() {}, 1);
@@ -439,6 +468,7 @@ function testIsTimeoutSet() {
   clock.uninstall();
 }
 
+
 function testBalksOnTimeoutsGreaterThanMaxInt() {
   // Browsers have trouble with timeout greater than max int, so we
   // want Mock Clock to fail if this happens.
@@ -457,6 +487,7 @@ function testBalksOnTimeoutsGreaterThanMaxInt() {
   clock.uninstall();
 }
 
+
 function testCorrectSetTimeoutIsRestored() {
   var safe = goog.functions.error('should not have been called');
   stubs.set(window, 'setTimeout', safe);
@@ -469,6 +500,7 @@ function testCorrectSetTimeoutIsRestored() {
   // goog.testing.TestCase#finalize.
   assertEquals('setTimeout is restored', safe, window.setTimeout);
 }
+
 
 function testMozRequestAnimationFrame() {
   // Setting this function will indirectly tell the mock clock to mock it out.
@@ -487,9 +519,10 @@ function testMozRequestAnimationFrame() {
   clock.dispose();
 }
 
+
 function testClearBeforeSet() {
   var clock = new goog.testing.MockClock(true);
-  var expectedId = 1;
+  var expectedId = goog.testing.MockClock.nextId;
   window.clearTimeout(expectedId);
 
   var fn = goog.testing.recordFunction();
@@ -523,6 +556,61 @@ function testNonFunctionArguments() {
   clock.tick(1);
 
   clock.dispose();
+}
+
+
+function testUnspecifiedTimeout() {
+  var clock = new goog.testing.MockClock(true);
+  var m0a = false, m0b = false, m10 = false;
+  setTimeout(function() { m0a = true; });
+  setTimeout(function() { m10 = true; }, 10);
+  assertEquals(2, clock.getTimeoutsMade());
+
+  assertFalse(m0a);
+  assertFalse(m0b);
+  assertFalse(m10);
+
+  assertEquals(0, clock.tick(0));
+  assertEquals(0, clock.getCurrentTime());
+
+  assertTrue(m0a);
+  assertFalse(m0b);
+  assertFalse(m10);
+
+  setTimeout(function() { m0b = true; });
+  assertEquals(3, clock.getTimeoutsMade());
+
+  assertEquals(0, clock.tick(0));
+  assertEquals(0, clock.getCurrentTime());
+
+  assertTrue(m0a);
+  assertTrue(m0b);
+  assertFalse(m10);
+
+  assertEquals(10, clock.tick(10));
+  assertEquals(10, clock.getCurrentTime());
+
+  assertTrue(m0a);
+  assertTrue(m0b);
+  assertTrue(m10);
+
+  clock.uninstall();
+}
+
+
+function testUnspecifiedInterval() {
+  var clock = new goog.testing.MockClock(true);
+  var times = 0;
+  var handle = setInterval(function() {
+    if (++times >= 5) {
+      clearInterval(handle);
+    }
+  });
+
+  clock.tick(0);
+  assertEquals(5, times);
+
+  clock.uninstall();
 }
 
 

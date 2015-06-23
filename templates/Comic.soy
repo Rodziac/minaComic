@@ -5,24 +5,24 @@
   * @param? params comic data
  */
 {template .pageContents}
-    <div class="comicContentContainer">
-        <h2 class="comicTitleContainer" title="{$params.humanReadableDate}">
+    <div class="{css comicContentContainer}">
+        <h2 class="{css comicTitleContainer}" title="{$params.humanReadableDate}">
             {$params.title}
         </h2>
-        <div class="advertisement wide top"><img src="http://placehold.it/350x65&text=top horizontal advertisement"></div>
-        <div class="comicNavigation">
+        <div class="{css advertisement} {css wide} {css top}"><img src="http://placehold.it/350x65&text=top horizontal advertisement"></div>
+        <div class="{css comicNavigation}">
             {call .comicNavigation data="all" /}
         </div>
-        <div class="advertisement long left"><img src="http://placehold.it/150x550&text=left vertical advertisement"></div>
-        <div class="comicContainer">
+        <div class="{css advertisement} {css long} {css left}"><img src="http://placehold.it/150x550&text=left vertical advertisement"></div>
+        <div class="{css comicContainer}">
             {call .comicWrapper data="all" /}
         </div>
-        <div class="advertisement long right"><img src="http://placehold.it/150x550&text=right vertical advertisement"></div>
-        <div class="comicNavigation">
+        <div class="{css advertisement} {css long} {css right}"><img src="http://placehold.it/150x550&text=right vertical advertisement"></div>
+        <div class="{css comicNavigation}">
             {call .comicNavigation data="all" /}
         </div>
-        <div class="advertisement wide bottom"><img src="http://placehold.it/350x65&text=Advertisement: bottom horizontal advertisement"></div>
-        <div class="comicDescriptionContainer">
+        <div class="{css advertisement} {css wide} {css bottom}"><img src="http://placehold.it/350x65&text=Advertisement: bottom horizontal advertisement"></div>
+        <div class="{css comicDescriptionContainer}">
             {call .descriptionWrapper data="all" /}
         </div>
     </div>
@@ -33,11 +33,11 @@
  * @param? params comic data
  */
 {template .comicNavigation}
-    <a class="navIcon navFirst {if $params.prevId or $params.prevId == 0} {else}deactive{/if}" href="{if $params.prevId or $params.prevId == 0}/comic/0{else}javascript:;{/if}" title="First"></a>
-    <a class="navIcon navPrevious {if $params.prevId or $params.prevId == 0} {else}deactive{/if}" href="{if $params.prevId or $params.prevId == 0}/comic/{$params.prevId}{else}javascript:;{/if}" title="Previous"></a>
-    <a class="navIcon navRandom" href="/comic/{$params.randomComicId}" title="Random"></a>
-    <a class="navIcon navNext {if not $params.nextId}deactive{/if}" href="{if $params.nextId}/comic/{$params.nextId}{else}javascript:;{/if}" title="Next"></a>
-    <a class="navIcon navLatest {if not $params.nextId}deactive{/if}" href="{if $params.nextId}/comic/{$params.latestComicId}{else}javascript:;{/if}" title="Latest"></a>
+    <a class="{css navIcon} {css navFirst} {if $params.prevId or $params.prevId == 0} {else}{css deactive}{/if}" href="{if $params.prevId or $params.prevId == 0}/comic/0{else}javascript:;{/if}" title="First"></a>
+    <a class="{css navIcon} {css navPrevious} {if $params.prevId or $params.prevId == 0} {else}{css deactive}{/if}" href="{if $params.prevId or $params.prevId == 0}/comic/{$params.prevId}{else}javascript:;{/if}" title="Previous"></a>
+    <a class="{css navIcon} {css navRandom}" href="/comic/{$params.randomComicId}" title="Random"></a>
+    <a class="{css navIcon} {css navNext} {if not $params.nextId}{css deactive}{/if}" href="{if $params.nextId}/comic/{$params.nextId}{else}javascript:;{/if}" title="Next"></a>
+    <a class="{css navIcon} {css navLatest} {if not $params.nextId}{css deactive}{/if}" href="{if $params.nextId}/comic/{$params.latestComicId}{else}javascript:;{/if}" title="Latest"></a>
 {/template}
 
 /**
@@ -49,7 +49,7 @@
     /*{if $params.comicImageUrl}*/
     {if true}
         {if $params.comicId != $params.latestComicId} <a href="/comic/{$params.nextId}"> {/if}
-            <img class="comicElement" src="/*{$params.comicImageUrl}*/http://placehold.it/550x1000&text=comic" alt="{$params.altText}" />
+            <img class="{css comicElement}" src="/*{$params.comicImageUrl}*/http://placehold.it/550x1000&text=comic" alt="{$params.altText}" />
         {if $params.comicId != $params.latestComicId} </a> {/if}
     {elseif $params.comicSwfUrl}
     {elseif $params.comicYoutubeEmbed}
@@ -61,10 +61,10 @@
  * @param params comic data
  */
 {template .descriptionWrapper}
-    <h3 class="comicDescriptionTitle">
+    <h3 class="{css comicDescriptionTitle}">
         {$params.humanReadableDate} - {$params.title}
     </h3>
-    <p class="comicDescription">
+    <p class="{css comicDescription}">
         {$params.description}
     </p>
 {/template}

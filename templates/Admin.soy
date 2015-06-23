@@ -5,10 +5,10 @@
  */
 {template .pageContents}
 
-<div class="adminContentContainer">
-    <div class="adminControlPanel">
+<div class="{css adminContentContainer}">
+    <div class="{css adminControlPanel}">
         {call .adminPanelTabs data="all" /}
-        <div class="goog-tab-bar-clear"></div>
+        <div class="{css goog-tab-bar-clear}"></div>
         {call .adminPanelContents data="all" /}
     </div>
 </div>
@@ -19,10 +19,10 @@
  * Tabs of admin panel
  */
 {template .adminPanelTabs}
-<div id="tabs" class="goog-tab-bar goog-tab-bar-top">
-    <div class="goog-tab goog-tab-selected">Post Editor</div>
-    <div class="goog-tab">Post List</div>
-    <div class="goog-tab">Content Management</div>
+<div id="tabs" class="{css goog-tab-bar} {css goog-tab-bar-top}">
+    <div class="{css goog-tab} {css goog-tab-selected}">Post Editor</div>
+    <div class="{css goog-tab}">Post List</div>
+    <div class="{css goog-tab}">Content Management</div>
 </div>
 {/template}
 
@@ -30,7 +30,7 @@
  * Content container of admin panel
  */
 {template .adminPanelContents}
-<div id="tabContent" class="goog-tab-content"></div>
+<div id="tabContent" class="{css goog-tab-content}"></div>
 {/template}
 
 /**
@@ -40,41 +40,41 @@
  */
 {template .postEditor}
 <div id="postForm">
-    <input type="text" class="comicId" disabled=disabled hidden=hidden value="{if $params.comicId}{$params.comicId}{else}-1{/if}"></input>
-    <div class="inputContainer title">
-        <span class="inputLabel">Title: </span>
-        <input type="text" class="title" value="{if $params.title}{$params.title}{/if}"></input>
+    <input type="text" class="{css comicId}" disabled=disabled hidden=hidden value="{if $params.comicId}{$params.comicId}{else}-1{/if}"></input>
+    <div class="{css inputContainer} {css title}">
+        <span class="{css inputLabel}">Title: </span>
+        <input type="text" class="{css title}" value="{if $params.title}{$params.title}{/if}"></input>
     </div>
-    <div class="inputContainer description">
-        <span class="inputLabel">Description: </span>
-        <div class="descriptionContainer">
+    <div class="{css inputContainer} {css description}">
+        <span class="{css inputLabel}">Description: </span>
+        <div class="{css descriptionContainer}">
           <div id='descriptionEditorToolbox'></div>
           <div id='descriptionText'>{if $params.description}{$params.description}{/if}</div>
         </div>
     </div>
-    <div class="inputContainer altText">
-        <span class="inputLabel">Alt text: </span>
-        <input type="text" class="altText" value="{if $params.altText}{$params.altText}{/if}"></input>
+    <div class="{css inputContainer} {css altText}">
+        <span class="{css inputLabel}">Alt text: </span>
+        <input type="text" class="{css altText}" value="{if $params.altText}{$params.altText}{/if}"></input>
     </div>
-    <div class="inputContainer datePicker">
-        <span class="inputLabel">Live date: </span>
-        <div class="comicStartDate"></div>
+    <div class="{css inputContainer} {css datePicker}">
+        <span class="{css inputLabel}">Live date: </span>
+        <div class="{css comicStartDate}"></div>
     </div>
-    <div class="inputContainer disabled">
-        <span class="inputLabel">Disabled: </span>
-        <span class="isDisabled goog-checkbox {if $params.disabled}goog-checkbox-checked{else}goog-checkbox-unchecked{/if}"></span>
+    <div class="{css inputContainer} {css disabled}">
+        <span class="{css inputLabel}">Disabled: </span>
+        <span class="{css isDisabled} {css goog}-checkbox {if $params.disabled}{css goog}-checkbox-checked{else}{css goog}-checkbox-unchecked{/if}"></span>
     </div>
-    <div class="inputContainer embed">
-        <span class="inputLabel">Embed code: </span>
-        <textarea class="mediaEmbedCode">{if $params.comicEmbed}{$params.comicEmbed}{/if}</textarea>
+    <div class="{css inputContainer} {css embed}">
+        <span class="{css inputLabel}">Embed code: </span>
+        <textarea class="{css mediaEmbedCode}">{if $params.comicEmbed}{$params.comicEmbed}{/if}</textarea>
     </div>
-    <div class="inputContainer image">
-        <span class="inputLabel">Comic Image: </span>
-        <input type="file" accept="image{literal}/*{/literal}" class="comicImage"></input>
+    <div class="{css inputContainer} {css image}">
+        <span class="{css inputLabel}">Comic Image: </span>
+        <input type="file" accept="image{literal}/*{/literal}" class="{css comicImage}"></input>
     </div>
-    <div class="buttonsContainer">
-        <span class="submitBtn button">Submit</span>
-        <span class="resetBtn button">Reset</span>
+    <div class="{css buttonsContainer}">
+        <span class="{css submitBtn} {css button}">Submit</span>
+        <span class="{css resetBtn} {css button}">Reset</span>
     </div>
 </div>
 {/template}
@@ -85,11 +85,11 @@
  * @param? params comic array
  */
 {template .postList}
-<select size="10" class="comicsList" name="comicsList">
+<select size="10" class="{css comicsList}" name="comicsList">
     {foreach $comic in $params.comics}<option value="{$comic.comicId}">{$comic.date} - {$comic.title}</option>{/foreach}
 </select>
-<span class="submitBtn button">Submit</span>
-<span class="deleteBtn button">Delete</span>
+<span class="{css submitBtn} {css button}">Submit</span>
+<span class="{css deleteBtn} {css button}">Delete</span>
 {/template}
 
 /**
@@ -98,10 +98,10 @@
  * Updates if exists, creates if not.
  */
 {template .contentEditor}
-    <div id="contentType" class="use-arrow"></div>
-    <div class="contentEditorContainer">
+    <div id="contentType" class="{css use-arrow}"></div>
+    <div class="{css contentEditorContainer}">
       <div id='contentToolbar'></div>
       <div id='contentText'></div>
     </div>
-    <span class="submitBtn button">Submit</span>
+    <span class="{css submitBtn} {css button}">Submit</span>
 {/template}
